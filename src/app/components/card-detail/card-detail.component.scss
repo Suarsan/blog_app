@@ -1,0 +1,71 @@
+@import '../../../colors';
+article {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
+    >figure {
+        position: relative;
+        border-radius: .5rem;
+        overflow: hidden;
+        height: 250px;
+        margin: 0;
+        >a {
+            >img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+        >div {
+            display: flex;
+            flex-direction: row;
+            position: absolute;
+            bottom: 15px;
+            left: 15px;
+            >a {
+                >span {
+                    font-size: 1rem;
+                    font-weight: 500;
+                    font-style: italic;
+                    padding: 3px 7px;
+                    border-radius: 10rem;
+                    color: $light-color;
+                    background-color: rgba($dark-color, .5);
+                }
+            }
+        }
+    }
+    >div {
+        display: flex;
+        flex-direction: column;
+        >a {
+            >h3 {
+                font-size: 2rem;
+                margin: 1rem 0 1rem 0;
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+        >div {
+            display: flex;
+            flex-direction: row;
+            span {
+                font-size: 1.2rem;
+                color: $medium-color;
+                margin-right: 1rem;
+                >i {
+                    color: $medium-color;
+                    margin-right: .5rem;
+                }
+            }
+        }
+        >p {
+            font-size: 1.4rem;
+            font-weight: 300;
+        }
+    }
+}

@@ -1,0 +1,68 @@
+@import '../../../colors';
+section {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
+    >header {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        background-color: #f7c828;
+        padding: 2rem 0;
+        margin-bottom: 3rem;
+        border-radius: 1rem;
+        box-shadow: 1px 4px 8px 1px rgba(0, 0, 0, .12);
+        >mark {
+            font-size: 3.5rem;
+            font-weight: 600;
+            margin: 0 1rem;
+            background-color: transparent;
+            color: $light-color;
+        }
+        >span {
+            display: flex;
+            flex-direction: column;
+            >span {
+                font-size: 1.4rem;
+                font-weight: 500;
+                color: $light-color;
+            }
+        }
+    }
+    >article {
+        display: flex;
+        flex-direction: column;
+        background-color: rgba($light-color, .75);
+        border-radius: 1rem;
+        >dl {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            flex-grow: 1;
+            margin: 1rem .5rem;
+            >dl {
+                display: flex;
+                flex-direction: column;
+                margin: 1rem;
+                >dt {
+                    font-size: 1.8rem;
+                    font-weight: 500;
+                    margin: 1rem 0 2rem 0;
+                    color: rgba($dark-color, 1);
+                }
+                >dd {
+                    font-size: 1.3rem;
+                    font-weight: 300;
+                    margin: 0 0 1rem 0;
+                    color: rgba($dark-color, 1);
+                }
+                i {
+                    font-size: 1.2rem;
+                    color: rgba($dark-color, .7);
+                    margin-right: .5rem;
+                }
+            }
+        }
+    }
+}

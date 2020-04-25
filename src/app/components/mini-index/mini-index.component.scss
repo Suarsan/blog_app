@@ -1,0 +1,49 @@
+@import '../../../colors';
+section {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
+    >header {
+        display: flex;
+        flex-direction: row;
+        border-bottom: 2px solid $light-color;
+        margin: 3rem 0 3rem 0;
+        >h5 {
+            padding-bottom: 1rem;
+            margin: 0 0 -2px 0;
+            border-bottom: 2px solid $dark-color;
+        }
+    }
+    >div {
+        display: flex;
+        flex-direction: column;
+        >ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            >li {
+                position: relative;
+                font-size: 1.2rem;
+                font-weight: 500;
+                padding: 1rem 0 1rem 3rem;
+                border-bottom: 1px solid $light-color;
+                text-transform: uppercase;
+                color: $dark-color;
+                &:before {
+                    content: '';
+                    position: absolute;
+                    top: 50%;
+                    left: 15px;
+                    width: 4px;
+                    height: 4px;
+                    transform: translateY(-50%);
+                    background-color: $dark-color;
+                    border-radius: 50%;
+                }
+                &:last-of-type {
+                    border-bottom: 0;
+                }
+            }
+        }
+    }
+}

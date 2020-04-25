@@ -1,0 +1,76 @@
+@import '../../../colors';
+section {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
+    >header {
+        display: flex;
+        flex-direction: row;
+        border-bottom: 2px solid $light-color;
+        margin: 3rem 0 3rem 0;
+        >h5 {
+            padding-bottom: 1rem;
+            margin: 0 0 -2px 0;
+            border-bottom: 2px solid $dark-color;
+        }
+    }
+    >div {
+        display: flex;
+        flex-direction: row;
+        article {
+            display: flex;
+            flex-direction: column;
+            flex-basis: 25%;
+            margin: 1rem;
+            >figure {
+                position: relative;
+                border-radius: .5rem;
+                margin: 0;
+                overflow: hidden;
+                height: 150px;
+                >img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+                >div {
+                    position: absolute;
+                    bottom: 15px;
+                    left: 15px;
+                    display: flex;
+                    flex-direction: row;
+                    >span {
+                        font-size: 1rem;
+                        font-weight: 500;
+                        font-style: italic;
+                        padding: 3px 7px;
+                        border-radius: 10rem;
+                        color: $light-color;
+                        background-color: rgba($dark-color, .5);
+                    }
+                }
+            }
+            >div {
+                display: flex;
+                flex-direction: column;
+                >h3 {
+                    font-size: 2rem;
+                    margin: 1rem 0 1rem 0;
+                }
+                >div {
+                    display: flex;
+                    flex-direction: row;
+                    >span {
+                        font-size: 1.2rem;
+                        color: $medium-color;
+                        margin-right: 1rem;
+                        >i {
+                            color: $medium-color;
+                            margin-right: .5rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

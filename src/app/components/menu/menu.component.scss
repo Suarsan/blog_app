@@ -1,0 +1,70 @@
+@import '../../../colors';
+nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: .5rem 0;
+    >div {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+        max-width: 1024px;
+        >ul {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+            >li {
+                display: flex;
+                flex-direction: row;
+                font-size: 1.4rem;
+                outline: 0;
+                >a {
+                    text-decoration: none;
+                    color: rgba($dark-color, 1);
+                    outline: 0;
+                    &:visited {
+                        color: rgba($dark-color, 1);
+                    }
+                }
+            }
+            &:first-of-type {
+                >li {
+                    margin-right: 1rem;
+                    >a {
+                        margin: 1rem;
+                    }
+                    &:hover {
+                        cursor: pointer;
+                        transform: scale(1.05);
+                        background-color: rgba(0, 0, 0, .1);
+                    }
+                }
+            }
+            &:last-of-type {
+                >li {
+                    margin-right: 1rem;
+                    >i {
+                        color: rgba(0, 0, 0, .75);
+                        &:hover {
+                            cursor: pointer;
+                            transform: scale(1.25);
+                        }
+                    }
+                    &:last-of-type {
+                        padding: 1rem;
+                        background-color: red;
+                        color: white;
+                        margin-left: 1rem;
+                        &:hover {
+                            cursor: pointer;
+                            filter: saturate(.75);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

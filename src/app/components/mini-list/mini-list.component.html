@@ -1,0 +1,19 @@
+<section>
+    <header>
+        <h5>REVIEWS</h5>
+    </header>
+    <div>
+        <article *ngFor="let post of _posts">
+            <div>
+                <img src="{{post?.image}}" alt="">
+            </div>
+            <div>
+                <h3>{{post?.title}}</h3>
+                <div>
+                    <span><i class="far fa-comment"></i>{{post?.comments}}</span>
+                    <span>1013</span>
+                </div>
+            </div>
+        </article>
+    </div>
+</section>

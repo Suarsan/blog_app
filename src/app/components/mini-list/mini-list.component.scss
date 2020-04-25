@@ -1,0 +1,73 @@
+@import '../../../colors';
+section {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
+    >header {
+        display: flex;
+        flex-direction: row;
+        border-bottom: 2px solid $light-color;
+        margin: 3rem 0 3rem 0;
+        >h5 {
+            padding-bottom: 1rem;
+            margin: 0 0 -2px 0;
+            border-bottom: 2px solid $dark-color;
+        }
+    }
+    >div {
+        display: flex;
+        flex-direction: column;
+        >article {
+            display: flex;
+            flex-direction: row;
+            border-bottom: 1px solid $light-color;
+            padding: 1rem 0 1rem 0;
+            >div:first-of-type {
+                position: relative;
+                width: 70px;
+                min-width: 70px;
+                max-width: 70px;
+                height: 70px;
+                overflow: hidden;
+                margin: 0;
+                >img {
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                }
+            }
+            >div:last-of-type {
+                display: flex;
+                flex-direction: column;
+                margin-left: 2rem;
+                justify-content: space-between;
+                >h3 {
+                    font-size: 1.3rem;
+                    margin: 0;
+                    max-height: 35px;
+                    overflow: hidden;
+                }
+                >div {
+                    display: flex;
+                    flex-direction: row;
+                    >span {
+                        font-size: 1.2rem;
+                        color: $medium-color;
+                        margin-right: 1rem;
+                        >i {
+                            color: $medium-color;
+                            margin-right: .5rem;
+                        }
+                    }
+                }
+            }
+            &:last-of-type {
+                border: 0;
+            }
+        }
+    }
+}

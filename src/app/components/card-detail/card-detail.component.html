@@ -1,0 +1,26 @@
+<article *ngIf="post">
+    <figure>
+        <a [routerLink]="['/post', post.slug]">
+            <img [src]="post?.image" alt="">
+        </a>
+        <div *ngIf="post?.tags?.length > 0">
+            <a [routerLink]="['/tags', post.tags[0]]">
+                <span>{{post?.tags[0]}}</span>
+            </a>
+        </div>
+    </figure>
+    <div>
+        <a [routerLink]="['/post', post.slug]">
+            <h3>{{post?.title}}</h3>
+        </a>
+        <div>
+            <a [routerLink]="['/author', post.author]">
+                <span>{{post?.author}}, </span>
+            </a>
+            <span>{{post?.creation_date | dateTransform: 'ago'}}</span>
+            <span><i class="far fa-comment"></i>{{post?.comments}}</span>
+            <span><i class="far fa-clock"></i>{{post?.read_time | dateTransform: 'time'}}min</span>
+        </div>
+        <p>{{post?.paragraphs[0]?.content}}</p>
+    </div>
+</article>

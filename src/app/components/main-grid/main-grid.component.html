@@ -1,0 +1,62 @@
+<section>
+    <div>
+        <div>
+            <article *ngIf="post1">
+                <img [src]="post1?.image" alt="">
+                <div [routerLink]="['/post', post1.slug]">
+                    <div>
+                        <span *ngFor="let tag of post1?.tags?.slice(0,3)">{{tag}}</span>
+                    </div>
+                    <a [routerLink]="['/post', post1?.slug]">
+                        <h1>{{post1.title}}</h1>
+                    </a>
+                </div>
+            </article>
+        </div>
+        <div>
+            <div>
+                <div>
+                    <article *ngIf="post2">
+                        <img [src]="post2?.image" alt="">
+                        <div [routerLink]="['/post', post2.slug]">
+                            <div>
+                                <span *ngFor="let tag of post2.tags?.slice(0, 1)">{{tag}}</span>
+                            </div>
+                            <a [routerLink]="['/post', post2?.slug]">
+                                <h1>{{post2.title}}</h1>
+                            </a>
+                        </div>
+                    </article>
+                </div>
+                <div>
+                    <article *ngIf="post3">
+                        <img [src]="post3?.image" alt="">
+                        <div [routerLink]="['/post', post3?.slug]">
+                            <div>
+                                <span *ngFor="let tag of post3?.tags?.slice(0, 1)">{{tag}}</span>
+                            </div>
+                            <a [routerLink]="['/post', post3?.slug]">
+                                <h1>{{post3?.title}}</h1>
+                            </a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <article *ngIf="post4">
+                        <img [src]="post4?.image" alt="">
+                        <div [routerLink]="['/post', post4?.slug]">
+                            <div>
+                                <span *ngFor="let tag of post4?.tags?.slice(0, 2)">{{tag}}</span>
+                            </div>
+                            <a [routerLink]="['/post', post4?.slug]">
+                                <h1>{{post4?.title}}</h1>
+                            </a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

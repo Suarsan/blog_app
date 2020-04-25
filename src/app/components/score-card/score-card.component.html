@@ -1,0 +1,21 @@
+<section>
+    <header>
+        <mark>{{analysis?.score}}</mark>
+        <span>
+            <span>puntos</span>
+        <span>básicos</span>
+        </span>
+    </header>
+    <article>
+        <dl>
+            <dl>
+                <dt>Pros</dt>
+                <dd *ngFor="let pro of analysis?.pros"><i class="far fa-check-circle"></i>{{pro}}</dd>
+            </dl>
+            <dl>
+                <dt>Contras</dt>
+                <dd *ngFor="let con of analysis?.cons"><i class="far fa-times-circle"></i>{{con}}</dd>
+            </dl>
+        </dl>
+    </article>
+</section>

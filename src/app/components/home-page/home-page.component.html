@@ -1,0 +1,15 @@
+<main>
+    <div>
+        <app-main-grid [posts]="posts"></app-main-grid>
+    </div>
+    <div>
+        <app-card-detail *ngFor="let post of posts" [post]="post"></app-card-detail>
+    </div>
+    <div>
+        <app-card-list [posts]="posts"></app-card-list>
+    </div>
+    <div>
+        <app-mini-list [posts]="posts"></app-mini-list>
+        <app-mini-index [index]="index"></app-mini-index>
+    </div>
+</main>
