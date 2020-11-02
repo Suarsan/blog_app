@@ -1,11 +1,11 @@
 <section>
     <header>
-        <h5>CATEGORIES</h5>
+        <h2>TAGS</h2>
     </header>
     <div>
         <ul>
-            <li *ngFor="let i of index">
-                {{i}}
+            <li *ngFor="let i of index?.slice(0, 5)">
+                <a [routerLink]="['/tag', i.content]">{{i.content}}</a>
             </li>
         </ul>
     </div>

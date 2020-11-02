@@ -2,16 +2,14 @@
 section {
     display: flex;
     flex-direction: column;
-    margin: 1rem;
     >header {
         display: flex;
         flex-direction: row;
-        border-bottom: 2px solid $light-color;
-        margin: 3rem 0 3rem 0;
-        >h5 {
-            padding-bottom: 1rem;
-            margin: 0 0 -2px 0;
-            border-bottom: 2px solid $dark-color;
+        border-bottom: 2px solid #f0f0f0;
+        margin: 3rem 0;
+        >h2 {
+            font-size: 1.8rem;
+            font-weight: 500;
         }
     }
     >div {
@@ -30,7 +28,7 @@ section {
                 height: 70px;
                 overflow: hidden;
                 margin: 0;
-                >img {
+                >a>img {
                     position: absolute;
                     width: 100%;
                     height: 100%;
@@ -38,6 +36,10 @@ section {
                     top: 50%;
                     left: 50%;
                     transform: translate(-50%, -50%);
+                    outline: 0;
+                    &:hover {
+                        cursor: pointer;
+                    }
                 }
             }
             >div:last-of-type {
@@ -45,11 +47,20 @@ section {
                 flex-direction: column;
                 margin-left: 2rem;
                 justify-content: space-between;
-                >h3 {
-                    font-size: 1.3rem;
+                >a>p {
+                    font-size: 1.4rem;
+                    font-weight: 500;
                     margin: 0;
-                    max-height: 35px;
                     overflow: hidden;
+                    text-overflow: ellipsis;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 2;
+                    -webkit-box-orient: vertical;
+                    &:hover {
+                        cursor: pointer;
+                        text-decoration: underline;
+                        outline: 0;
+                    }
                 }
                 >div {
                     display: flex;
@@ -58,8 +69,10 @@ section {
                         font-size: 1.2rem;
                         color: $medium-color;
                         margin-right: 1rem;
-                        >i {
-                            color: $medium-color;
+                        >svg {
+                            width: 13px;
+                            height: 13px;
+                            fill: rgba($medium-color, 1);
                             margin-right: .5rem;
                         }
                     }

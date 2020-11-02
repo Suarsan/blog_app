@@ -7,11 +7,12 @@ import { join } from 'path';
 import { AppServerModule } from './src/main.server';
 import { APP_BASE_HREF } from '@angular/common';
 import { existsSync } from 'fs';
+import { RESPONSE } from '@nguniversal/express-engine/tokens';
 
 // The Express app is exported so that it can be used by serverless Functions.
 export function app() {
   const server = express();
-  const distFolder = join(process.cwd(), 'dist/bloggraphql/browser');
+  const distFolder = join(process.cwd(), './browser');
   const indexHtml = existsSync(join(distFolder, 'index.original.html')) ? 'index.original.html' : 'index';
 
   // Our Universal express-engine (found @ https://github.com/angular/universal/tree/master/modules/express-engine)
@@ -31,19 +32,28 @@ export function app() {
 
   // All regular routes use the Universal engine
   server.get('*', (req, res) => {
-    res.render(indexHtml, { req, providers: [{ provide: APP_BASE_HREF, useValue: req.baseUrl }] });
+    res.render(indexHtml, {
+      req,
+      providers: [{
+        provide: RESPONSE,
+        useValue: res
+      }, {
+        provide: APP_BASE_HREF,
+        useValue: req.baseUrl
+      }]
+    });
   });
 
   return server;
 }
 
 function run() {
-  const port = process.env.PORT || 4000;
+  const port = process.env.PORT || 4001;
 
   // Start up the Node server
   const server = app();
   server.listen(port, () => {
-    console.log(`Node Express server listening on http://localhost:${port}`);
+    console.log(`Node Express server listening on http://127.0.0.1:${port}`);
   });
 }
 

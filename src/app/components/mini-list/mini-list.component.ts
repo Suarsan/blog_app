@@ -8,9 +8,7 @@ import { PostService } from '../../services/post-services/post-service/post.serv
 })
 export class MiniListComponent implements OnInit {
 
-  _posts;
-
-  @Input() set posts(posts) { if (posts) { this._posts = posts.slice(0, 3); } }
+  @Input() posts;
 
   constructor() { }
 

@@ -1,4 +1,14 @@
-header {
+:host {
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
+    >header {
+        display: flex;
+        flex-direction: column;
+    }
+    >div {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
 }

@@ -2,16 +2,14 @@
 section {
     display: flex;
     flex-direction: column;
-    margin: 1rem;
     >header {
         display: flex;
         flex-direction: row;
-        border-bottom: 2px solid $light-color;
-        margin: 3rem 0 3rem 0;
-        >h5 {
-            padding-bottom: 1rem;
-            margin: 0 0 -2px 0;
-            border-bottom: 2px solid $dark-color;
+        border-bottom: 2px solid #f0f0f0;
+        margin: 3rem 0;
+        >h2 {
+            font-size: 1.8rem;
+            font-weight: 500;
         }
     }
     >div {
@@ -23,12 +21,15 @@ section {
             list-style: none;
             >li {
                 position: relative;
-                font-size: 1.2rem;
-                font-weight: 500;
                 padding: 1rem 0 1rem 3rem;
                 border-bottom: 1px solid $light-color;
-                text-transform: uppercase;
-                color: $dark-color;
+                >a {
+                    font-size: 1.2rem;
+                    font-weight: 500;
+                    color: $dark-color;
+                    text-transform: uppercase;
+                    margin: 0;
+                }
                 &:before {
                     content: '';
                     position: absolute;

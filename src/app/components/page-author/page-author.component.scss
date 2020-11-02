@@ -1,0 +1,27 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    max-width: 1024px;
+    margin: 0 auto;
+    >div {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin: 0 2rem;
+        >h1 {
+            font-size: 2rem;
+            font-weight: 500;
+            margin: 1rem 0 2rem 0;
+        }
+    }
+}
+
+@media screen and (min-width: 768px) {
+     :host {
+        display: flex;
+        flex-direction: column;
+        max-width: 1024px;
+        margin: 0 auto;
+        padding: 0 3rem;
+    }
+}

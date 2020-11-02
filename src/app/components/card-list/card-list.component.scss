@@ -2,25 +2,12 @@
 section {
     display: flex;
     flex-direction: column;
-    margin: 1rem;
-    >header {
-        display: flex;
-        flex-direction: row;
-        border-bottom: 2px solid $light-color;
-        margin: 3rem 0 3rem 0;
-        >h5 {
-            padding-bottom: 1rem;
-            margin: 0 0 -2px 0;
-            border-bottom: 2px solid $dark-color;
-        }
-    }
     >div {
         display: flex;
-        flex-direction: row;
-        article {
+        flex-direction: column;
+        >article {
             display: flex;
             flex-direction: column;
-            flex-basis: 25%;
             margin: 1rem;
             >figure {
                 position: relative;
@@ -28,10 +15,16 @@ section {
                 margin: 0;
                 overflow: hidden;
                 height: 150px;
-                >img {
-                    width: 100%;
+                >a {
+                    display: flex;
+                    flex-direction: column;
                     height: 100%;
-                    object-fit: cover;
+                    >img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                        transition: all .25s ease;
+                    }
                 }
                 >div {
                     position: absolute;
@@ -39,7 +32,7 @@ section {
                     left: 15px;
                     display: flex;
                     flex-direction: row;
-                    >span {
+                    >a {
                         font-size: 1rem;
                         font-weight: 500;
                         font-style: italic;
@@ -49,27 +42,73 @@ section {
                         background-color: rgba($dark-color, .5);
                     }
                 }
+                &:hover {
+                    >a>img {
+                        transform: scale(1.05);
+                        transition: all 1s ease;
+                        cursor: pointer;
+                    }
+                }
             }
             >div {
                 display: flex;
                 flex-direction: column;
-                >h3 {
-                    font-size: 2rem;
-                    margin: 1rem 0 1rem 0;
+                >a {
+                    text-decoration: none;
+                    >p {
+                        font-size: 1.6rem;
+                        margin: 1rem 0 1rem 0;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        display: -webkit-box;
+                        -webkit-line-clamp: 3;
+                        -webkit-box-orient: vertical;
+                    }
+                    &:hover {
+                        cursor: pointer;
+                        text-decoration: underline;
+                    }
                 }
                 >div {
                     display: flex;
                     flex-direction: row;
-                    >span {
+                    >a {
                         font-size: 1.2rem;
                         color: $medium-color;
                         margin-right: 1rem;
-                        >i {
-                            color: $medium-color;
+                        &:nth-of-type(1) {
+                            cursor: pointer;
+                        }
+                        >svg {
+                            width: 13px;
+                            height: 13px;
+                            fill: rgba($medium-color, 1);
                             margin-right: .5rem;
                         }
                     }
                 }
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 575px) {
+    section {
+        >div {
+            flex-direction: row;
+            flex-wrap: wrap;
+            >article {
+                flex-basis: calc(50% - 2rem);
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 768px) {
+    section {
+        >div {
+            >article {
+                flex-basis: calc(25% - 2rem);
             }
         }
     }

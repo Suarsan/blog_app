@@ -1,0 +1,10 @@
+<div>
+    <article *ngFor="let item of items">
+        <a [routerLink]="item.slug" rel="bookmark">
+            <img [src]="environment.staticURL + item.image" [alt]="item.image">
+            <div>
+                <h3>{{item.title}}</h3>
+            </div>
+        </a>
+    </article>
+</div>

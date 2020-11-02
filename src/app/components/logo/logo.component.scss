@@ -2,13 +2,14 @@ div {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    margin: 50px 0 50px 0;
-    img {
-        width: 150px;
-        height: 150px;
-        outline: 0;
-        &:hover {
-            cursor: pointer;
+    >a {
+        img {
+            width: 5rem;
+            height: 5rem;
+            outline: 0;
+            &:hover {
+                cursor: pointer;
+            }
         }
     }
 }
