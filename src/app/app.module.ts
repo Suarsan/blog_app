@@ -27,6 +27,10 @@ import { PageSponsoredComponent } from './components/page-sponsored/page-sponsor
 import { CardGridComponent } from './components/card-grid/card-grid.component';
 import { PageTagComponent } from './components/page-tag/page-tag.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
+import { LoyaltyPrivacyComponent } from './components/loyalty-privacy/loyalty-privacy.component';
+import { LoyaltyCookiesComponent } from './components/loyalty-cookies/loyalty-cookies.component';
+import { LegalComponent } from './components/legal/legal.component';
+import { PageSomatotypeComponent } from './components/page-somatotype/page-somatotype.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +56,11 @@ import { NotfoundComponent } from './components/notfound/notfound.component';
     DateTransformPipe,
     PageAuthorComponent,
     PageTagComponent,
-    NotfoundComponent
+    NotfoundComponent,
+    LoyaltyPrivacyComponent,
+    LoyaltyCookiesComponent,
+    LegalComponent,
+    PageSomatotypeComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

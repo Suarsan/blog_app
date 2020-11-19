@@ -42,9 +42,9 @@ export class PageTagComponent implements OnInit, OnDestroy {
   }
 
   private _setMetaInfo(post) {
-    this.seoService.setTitle(post.title + ' · Tshirts and basics');
+    this.seoService.setTitle('Todas las camisetas básicas ' + this.tag);
     this.seoService.setMetaTags({
-      title: 'Todas las camisetas blancas con ' + this.tag,
+      title: 'Todas las camisetas básicas ' + this.tag,
       description: 'Las mejores camisetas blancas analizadas y filtradas por ' + this.tag,
       slug: 'tag/' + this.tag
     });

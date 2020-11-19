@@ -44,4 +44,10 @@ export class PostService {
       map(o => o['data']['getPostsByTag'])
     );
   }
+  public getPostsByTags(tags) {
+    return this.postDaoService.getPostsByTags(tags).pipe(
+      tap(o => console.dir(o)),
+      map(o => o['data']['getPostsByTags'])
+    );
+  }
 }

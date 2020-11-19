@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PostService } from '../../services/post-services/post-service/post.service';
+import { tap } from 'rxjs/internal/operators/tap';
 
 @Component({
   selector: 'app-menu',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
 
-  constructor() { }
+  brands;
+
+  constructor(private postService: PostService) { }
 
   ngOnInit() {
+    this._getBrands();
   }
 
+  public _getBrands() {
+    this.postService.getBrands().pipe(
+      tap(o => this.brands = o.sort((a, b) =>  a.title.toLowerCase() === b.title.toLowerCase() ? 0 : a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1 ))
+    ).subscribe();
+  }
 }

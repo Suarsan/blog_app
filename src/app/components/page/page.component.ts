@@ -1,8 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
-import { SeoService } from 'src/app/services/seo/seo.service';
 import { PostService } from 'src/app/services/post-services/post-service/post.service';
-import { tap, filter } from 'rxjs/internal/operators';
+import { tap, filter, flatMap } from 'rxjs/internal/operators';
 
 @Component({
   selector: 'app-page',
@@ -15,7 +14,6 @@ export class PageComponent implements OnInit, OnDestroy {
   routerSubscription;
 
   constructor(private activatedRoute: ActivatedRoute,
-              private seoService: SeoService,
               private router: Router,
               private postService: PostService) { }
 
@@ -28,13 +26,10 @@ export class PageComponent implements OnInit, OnDestroy {
   }
 
   private _getPost() {
-    const slug = this.activatedRoute.snapshot.params['slug'];
-    this.postService.getPost(slug).subscribe(
-      (post) => {
-        post ? this.post = post : this.router.navigate(['/404']);
-
-      }
-    );
+    this.activatedRoute.url.pipe(
+      flatMap(o => this.postService.getPost(o[o.length - 1].path)),
+      tap(post => post ? this.post = post : this.router.navigate(['/404']))
+    ).subscribe();
   }
 
   ngOnDestroy() {

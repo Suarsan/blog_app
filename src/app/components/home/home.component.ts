@@ -23,7 +23,6 @@ export class HomeComponent implements OnInit {
     this._getLastReviews();
     this._getBrands();
     this.getTags();
-    this._setMetaInfo();
   }
 
   public _getLastReviews() {
@@ -40,14 +39,5 @@ export class HomeComponent implements OnInit {
     this.tagsService.getTags().subscribe(
       (o) => this.tags = o
     );
-  }
-
-  private _setMetaInfo() {
-    this.seoService.setTitle('Tshirts and Basics · Analizamos camisetas blancas');
-    this.seoService.setMetaTags({
-      title: 'Tshirts and Basics · Analizamos camisetas blancas',
-      description: '👕 Encuentra las mejores camisetas basicas blancas al mejor precio. Analizamos su calidad y su durabilidad. Encuentra tu camiseta basica ideal. ¡Gratis!',
-      slug: ''
-    });
   }
 }

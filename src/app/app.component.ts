@@ -10,14 +10,14 @@ declare let gtag: Function;
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnDestroy{
+export class AppComponent implements OnDestroy {
 
   routerSubscription: Subscription;
 
   constructor(private router: Router) {
     this.routerSubscription = this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-          gtag('config', 'UA-180541567-1', { page_path: event.urlAfterRedirects });
+          gtag('config', 'G-MBJW38R751', { page_path: event.urlAfterRedirects });
       }
     });
   }

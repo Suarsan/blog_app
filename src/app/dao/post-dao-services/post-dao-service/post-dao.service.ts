@@ -26,6 +26,16 @@ export class PostDaoService {
             content
           }
           readTime
+          parent {
+            id
+            title
+            slug
+          }
+          children {
+            id
+            title
+            slug
+          }
           analysis {
             score
             pros
@@ -68,6 +78,16 @@ export class PostDaoService {
             id
             content
           }
+          parent {
+            id
+            title
+            slug
+          }
+          children {
+            id
+            title
+            slug
+          }
           analysis {
             score
             pros
@@ -109,6 +129,16 @@ export class PostDaoService {
           type {
             id
             content
+          }
+          parent {
+            id
+            title
+            slug
+          }
+          children {
+            id
+            title
+            slug
           }
           analysis {
             score
@@ -165,6 +195,9 @@ export class PostDaoService {
             }
             classes
           }
+          parent {
+            slug
+          }
           tags {
             content
           }
@@ -208,6 +241,9 @@ export class PostDaoService {
             }
             classes
           }
+          parent {
+            slug
+          }
           tags {
             content
           }
@@ -218,6 +254,53 @@ export class PostDaoService {
       query: getPostsByTag,
       variables: {
         tag
+      }}).valueChanges;
+  }
+  public getPostsByTags(tags) {
+    const getPostsByTags = gql`
+      query getPostsByTags($tags: [String]!) {
+        getPostsByTags(tags:$tags) {
+          id
+          slug
+          title
+          image
+          readTime
+          author {
+            firstname
+            lastname
+          }
+          type {
+            id
+            content
+          }
+          analysis {
+            score
+            pros
+            cons
+          }
+          paragraphs {
+            content
+            htmlTag {
+              id
+              content
+            }
+            classes
+          }
+          tags {
+            id
+            content
+          }
+          parent {
+            id
+            slug
+          }
+        }
+      }
+    `;
+    return this.apollo.watchQuery({
+      query: getPostsByTags,
+      variables: {
+        tags
       }}).valueChanges;
   }
 }

@@ -1,6 +1,5 @@
 <div>
-    <h1>Las mejores camisetas blancas {{ post?.title}} en 2020</h1>
-    <img [src]="environment.staticURL + post?.image" [alt]="post?.title">
+    <h1>{{ post?.title}}</h1>
     <ng-container *ngFor="let paragraph of post?.paragraphs.slice(0, 2)">
         <h5 *ngIf="paragraph?.htmlTag.content == 'title'" [innerHtml]="paragraph.content"></h5>
         <h6 *ngIf="paragraph?.htmlTag.content == 'subtitle'" [innerHtml]="paragraph.content"></h6>

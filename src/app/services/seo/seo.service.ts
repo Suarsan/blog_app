@@ -19,24 +19,23 @@ export class SeoService {
     this.meta.updateTag({ name: 'title', content: config.title});
     this.meta.updateTag({ name: 'description', content: config.description});
     this.meta.updateTag({ name: 'twitter:card', content: 'summary'});
-    this.meta.updateTag({ name: 'twitter:site', content: '@tshirts_basics'});
+    this.meta.updateTag({ name: 'twitter:site', content: '@camisetabasic'});
     this.meta.updateTag({ name: 'twitter:title', content: config.title});
     this.meta.updateTag({ name: 'twitter:description', content: config.description});
     this.meta.updateTag({ name: 'twitter:image', content: config.image});
 
     this.meta.updateTag({ name: 'og:type', content: 'article'});
-    this.meta.updateTag({ name: 'og:site_name', content: ''});
+    this.meta.updateTag({ name: 'og:site_name', content: 'camisetasbasicas.online/' + config.slug});
     this.meta.updateTag({ name: 'og:title', content: config.title});
     this.meta.updateTag({ name: 'og:description', content: config.description});
     this.meta.updateTag({ name: 'og:image', content: config.image});
-    this.meta.updateTag({ name: 'og:image', content: 'tshirtsandbasics.com/' + config.slug});
     this._setCanonical(config.slug);
   }
 
   private _setCanonical(slug) {
     const link: HTMLLinkElement = this.document.createElement('link');
     link.setAttribute('rel', 'canonical');
-    link.setAttribute('href', 'https://tshirtsandbasics.com/' + slug);
+    link.setAttribute('href', 'https://camisetasbasicas.online/' + slug);
     this.document.head.appendChild(link);
   }
 }

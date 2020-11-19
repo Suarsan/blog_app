@@ -34,10 +34,10 @@ export class PageAuthorComponent implements OnInit {
 }
 
 private _setMetaInfo(post) {
-  this.seoService.setTitle(post.title + ' · Tshirts and basics');
+  this.seoService.setTitle('Articulos escritos por ' + this.author + ' sobre camisetas básicas');
   this.seoService.setMetaTags({
-    title: 'Todos los articulos escritos por ' + this.author + ' sobre camisetas básicas blancas · Tshirtsandbasics',
-    description: 'Todos los articulos escritos por ' + this.author + ' sobre camisetas básicas blancas · Tshirtsandbasics',
+    title: 'Articulos escritos por ' + this.author + ' sobre camisetas básicas',
+    description: 'Todos los articulos escritos por ' + this.author + ' sobre camisetas básicas · Camisetas básicas online',
     slug: 'author/' + this.activatedRoute.snapshot.params['author']
   });
 }

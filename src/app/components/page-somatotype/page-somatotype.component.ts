@@ -5,11 +5,11 @@ import { SeoService } from 'src/app/services/seo/seo.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-page-brand',
-  templateUrl: './page-brand.component.html',
-  styleUrls: ['./page-brand.component.scss']
+  selector: 'app-page-somatotype',
+  templateUrl: './page-somatotype.component.html',
+  styleUrls: ['./page-somatotype.component.scss']
 })
-export class PageBrandComponent implements OnInit, OnChanges {
+export class PageSomatotypeComponent implements OnInit, OnChanges {
 
   environment;
   @Input() post;
@@ -21,28 +21,28 @@ export class PageBrandComponent implements OnInit, OnChanges {
               }
 
   ngOnInit(): void {
-      this._getPostsByParent();
+      this._getPostsByTags();
       this._setMetaInfo(this.post);
   }
 
   ngOnChanges() {
     if (this.post) {
-      this._getPostsByParent();
+      this._getPostsByTags();
     }
   }
-  private _getPostsByParent() {
-    this.postService.getPostsByParent(this.post.id).pipe(
+  private _getPostsByTags() {
+    this.postService.getPostsByTags(this.post.tags.map(t => t.content)).pipe(
       tap(o => this.posts = o)
     ).subscribe();
   }
 
   private _setMetaInfo(post) {
-    this.seoService.setTitle('Mejores camisetas básicas de la marca ' + post.title);
-    this.seoService.setMetaTags({
-      title: post.title,
-      description: post.paragraphs[0].content,
-      slug: post.slug
-    });
+    // this.seoService.setTitle('Mejores camisetas básicas de la marca ' + post.title);
+    // this.seoService.setMetaTags({
+    //   title: post.title,
+    //   description: post.paragraphs[0].content,
+    //   slug: post.slug
+    // });
   }
 
 }

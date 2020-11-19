@@ -45,11 +45,12 @@ export class PagePostComponent implements OnInit {
   }
 
   private _setMetaInfo(post) {
-    this.seoService.setTitle(post.title + ' · Tshirts and basics');
+    this.seoService.setTitle(post.title);
     this.seoService.setMetaTags({
       title: post.title,
       description: post.paragraphs[0].content,
-      slug: post.slug
+      slug: post.slug,
+      image: post.image
     });
   }
 }
