@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { PageAuthorComponent } from './page-author.component';
 
@@ -6,7 +6,7 @@ describe('PageAuthorComponent', () => {
   let component: PageAuthorComponent;
   let fixture: ComponentFixture<PageAuthorComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ PageAuthorComponent ]
     })

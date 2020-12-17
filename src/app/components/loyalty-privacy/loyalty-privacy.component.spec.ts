@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { LoyaltyPrivacyComponent } from './loyalty-privacy.component';
 
@@ -6,7 +6,7 @@ describe('LoyaltyPrivacyComponent', () => {
   let component: LoyaltyPrivacyComponent;
   let fixture: ComponentFixture<LoyaltyPrivacyComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ LoyaltyPrivacyComponent ]
     })

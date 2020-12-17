@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { PageTagComponent } from './page-tag.component';
 
@@ -6,7 +6,7 @@ describe('PageTagComponent', () => {
   let component: PageTagComponent;
   let fixture: ComponentFixture<PageTagComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ PageTagComponent ]
     })
