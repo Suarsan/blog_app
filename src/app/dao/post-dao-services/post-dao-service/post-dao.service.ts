@@ -30,6 +30,7 @@ export class PostDaoService {
             id
             title
             slug
+            image
           }
           children {
             id
@@ -196,6 +197,8 @@ export class PostDaoService {
             classes
           }
           parent {
+            id
+            title
             slug
           }
           tags {
@@ -242,6 +245,8 @@ export class PostDaoService {
             classes
           }
           parent {
+            id
+            title
             slug
           }
           tags {
@@ -292,6 +297,7 @@ export class PostDaoService {
           }
           parent {
             id
+            title
             slug
           }
         }
@@ -302,5 +308,52 @@ export class PostDaoService {
       variables: {
         tags
       }}).valueChanges;
+  }
+
+  public getPostsByScore() {
+    const getPostsByScore = gql`
+      query getPostsByScore {
+        getPostsByScore {
+          id
+          slug
+          title
+          image
+          readTime
+          author {
+            firstname
+            lastname
+          }
+          type {
+            id
+            content
+          }
+          analysis {
+            score
+            pros
+            cons
+          }
+          paragraphs {
+            content
+            htmlTag {
+              id
+              content
+            }
+            classes
+          }
+          tags {
+            id
+            content
+          }
+          parent {
+            id
+            title
+            slug
+          }
+        }
+      }
+    `;
+    return this.apollo.watchQuery({
+      query: getPostsByScore
+    }).valueChanges;
   }
 }

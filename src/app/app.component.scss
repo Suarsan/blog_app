@@ -1,14 +1,37 @@
+@import '../colors';
 :host {
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
+    height: 100%;
     >header {
         display: flex;
         flex-direction: column;
+        align-items: center;
+        >app-menu {
+            display: none;
+        }
     }
     >div {
         display: flex;
         flex-direction: column;
         flex-grow: 1;
+    }
+}
+
+@media screen and (min-width: 768px) {
+     :host {
+        >header {
+            position: relative;
+            flex-direction: row;
+            justify-content: space-between;
+            width: 90%;
+            margin: 0 auto;
+            >app-menu {
+                display: flex;
+            }
+        }
+        >app-menu {
+            display: none;
+        }
     }
 }

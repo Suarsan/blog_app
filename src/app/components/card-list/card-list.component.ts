@@ -11,7 +11,15 @@ export class CardListComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
+  public getScoreColor(analysis) {
+    if (analysis.score > 7.5) {
+      return 'green';
+    } else if ((analysis.score >= 5) && (analysis.score <= 7.5)) {
+      return 'yellow';
+    } else if (analysis.score < 5 ) {
+      return 'red';
+    }
+  }
 }

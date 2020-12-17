@@ -8,27 +8,42 @@
             a los lavados, precio, etc</p>
     </div>
     <div>
+        <header>
+            <h2>Top 10 mejor valoradas</h2>
+        </header>
         <div>
-            <h2>Últimas reviews</h2>
+            <app-card-list [posts]="bestReviews"></app-card-list>
         </div>
+    </div>
+    <div>
+        <header>
+            <h2>Últimos análisis</h2>
+        </header>
         <div>
             <app-card-list [posts]="lastReviews"></app-card-list>
         </div>
     </div>
     <div>
-        <div>
-            <h2>Marcas de camisetas básicas</h2>
-        </div>
+        <header>
+            <h2>Mejores marcas</h2>
+        </header>
         <app-directory [items]="brands"></app-directory>
     </div>
     <div>
         <div>
-            <div class="masvistos">
+            <section>
+                <header>
+                    <h2>Análisis más vistos</h2>
+                </header>
                 <app-mini-list [posts]="lastReviews"></app-mini-list>
-            </div>
-            <div class="etiquetas">
+            </section>
+            <section>
+                <header>
+                    <h2>Etiquetas</h2>
+                </header>
                 <app-mini-index [index]="tags"></app-mini-index>
-            </div>
+            </section>
+            <section></section>
         </div>
     </div>
     <div>

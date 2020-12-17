@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { PostService } from '../../services/post-services/post-service/post.service';
-import { tap } from 'rxjs/internal/operators/tap';
+import { tap, take } from 'rxjs/internal/operators';
+import { TransferState, makeStateKey } from '@angular/platform-browser';
+
+const BRANDS = makeStateKey('brands');
 
 @Component({
   selector: 'app-menu',
@@ -9,17 +12,30 @@ import { tap } from 'rxjs/internal/operators/tap';
 })
 export class MenuComponent implements OnInit {
 
+  showMenu = false;
   brands;
 
-  constructor(private postService: PostService) { }
+  constructor(private postService: PostService,
+              private state: TransferState) { }
 
   ngOnInit() {
     this._getBrands();
   }
 
+  public closeMenu() {
+    this.showMenu = false;
+  }
+  public openMenu() {
+    this.showMenu = true;
+  }
   public _getBrands() {
-    this.postService.getBrands().pipe(
-      tap(o => this.brands = o.sort((a, b) =>  a.title.toLowerCase() === b.title.toLowerCase() ? 0 : a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1 ))
-    ).subscribe();
+    this.brands = this.state.get(BRANDS, null);
+    if (!this.brands) {
+      this.postService.getBrands().pipe(
+        take(1),
+        tap(o => this.brands = o.sort((a, b) =>  a.title.toLowerCase() === b.title.toLowerCase() ? 0 : a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1 )),
+        tap(o => this.state.set(BRANDS, this.brands))
+        ).subscribe();
+    }
   }
 }

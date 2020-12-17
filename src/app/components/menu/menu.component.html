@@ -1,71 +1,79 @@
-<nav>
-    <div>
-        <app-logo></app-logo>
-        <ul>
-            <li>
-                <a>Marcas</a>
-                <ul>
-                    <li *ngFor="let brand of brands">
-                        <a [routerLink]="['/' + brand.slug]">{{ brand.title }}</a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a>Tipo</a>
-                <ul>
-                    <li>
-                        <a [routerLink]="['/camisetas-basicas-manga-corta']">De manga corta</a>
-                    </li>
-                    <li>
-                        <a [routerLink]="['/camisetas-basicas-manga-larga']">De manga larga</a>
-                    </li>
-                    <li>
-                        <a [routerLink]="['/camisetas-basicas-tirantes']">De tirantes</a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a [routerLink]="['/camisetas-basicas-hombre']">Hombre</a>
-                <ul>
-                    <li>
-                        <a [routerLink]="['/camisetas-basicas-hombres-ectomorfos']">Para hombre delgado</a>
-                    </li>
-                    <li>
-                        <a [routerLink]="['/camisetas-basicas-hombres-mesomorfos']">Para hombre fuerte</a>
-                    </li>
-                    <li>
-                        <a [routerLink]="['/camisetas-basicas-hombres-endomorfos']">Para hombre con sobrepeso</a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a [routerLink]="['/camisetas-basicas-mujer']">Mujer</a>
-                <ul>
-                    <li>
-                        <a [routerLink]="['/camisetas-basicas-mujeres-ectomorfas']">Para mujer delgada</a>
-                    </li>
-                    <li>
-                        <a [routerLink]="['/camisetas-basicas-mujeres-mesomorfas']">Para mujer fuerte</a>
-                    </li>
-                    <li>
-                        <a [routerLink]="['/camisetas-basicas-mujeres-endomorfas']">Para mujer con sobrepeso</a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a [routerLink]="['/camisetas-basicas-mujer']">Niños/as</a>
-                <ul>
-                    <li>
-                        <a [routerLink]="['/camisetas-basicas-niño']">Para niño</a>
-                    </li>
-                    <li>
-                        <a [routerLink]="['/camisetas-basicas-niña']">Para niña</a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a>SHOP</a>
-            </li>
-        </ul>
-    </div>
-</nav>
+<div [class.opened]="showMenu">
+    <nav>
+        <div>
+            <ul>
+                <li>
+                    <p>Marcas</p>
+                    <ul>
+                        <li *ngFor="let brand of brands">
+                            <a (click)="closeMenu()" [routerLink]="['/' + brand.slug]">{{ brand.title }}</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <p>Tipo</p>
+                    <ul>
+                        <li>
+                            <a (click)="closeMenu()" [routerLink]="['/camisetas-basicas-manga-corta']">De manga corta</a>
+                        </li>
+                        <li>
+                            <a (click)="closeMenu()" [routerLink]="['/camisetas-basicas-manga-larga']">De manga larga</a>
+                        </li>
+                        <li>
+                            <a (click)="closeMenu()" [routerLink]="['/camisetas-basicas-tirantes']">De tirantes</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a (click)="closeMenu()" [routerLink]="['/camisetas-basicas-hombre']">Hombre</a>
+                    <ul>
+                        <li>
+                            <a (click)="closeMenu()" [routerLink]="['/camisetas-basicas-hombres-ectomorfos']">Para hombre delgado</a>
+                        </li>
+                        <li>
+                            <a (click)="closeMenu()" [routerLink]="['/camisetas-basicas-hombres-mesomorfos']">Para hombre fuerte</a>
+                        </li>
+                        <li>
+                            <a (click)="closeMenu()" [routerLink]="['/camisetas-basicas-hombres-endomorfos']">Para hombre con sobrepeso</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a (click)="closeMenu()" [routerLink]="['/camisetas-basicas-mujer']">Mujer</a>
+                    <ul>
+                        <li>
+                            <a (click)="closeMenu()" [routerLink]="['/camisetas-basicas-mujeres-ectomorfas']">Para mujer delgada</a>
+                        </li>
+                        <li>
+                            <a (click)="closeMenu()" [routerLink]="['/camisetas-basicas-mujeres-mesomorfas']">Para mujer fuerte</a>
+                        </li>
+                        <li>
+                            <a (click)="closeMenu()" [routerLink]="['/camisetas-basicas-mujeres-endomorfas']">Para mujer con sobrepeso</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a (click)="closeMenu()" [routerLink]="['/camisetas-basicas-niños']">Niños/as</a>
+                    <ul>
+                        <li>
+                            <a (click)="closeMenu()" [routerLink]="['/camisetas-basicas-niño']">Para niño</a>
+                        </li>
+                        <li>
+                            <a (click)="closeMenu()" [routerLink]="['/camisetas-basicas-niña']">Para niña</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+<div *ngIf="!showMenu">
+</div>
+<span (click)="openMenu()" *ngIf="!showMenu">
+    <span>
+        <i></i>
+        <i></i>
+        <i></i>
+    </span>
+<p>Menu</p>
+</span>

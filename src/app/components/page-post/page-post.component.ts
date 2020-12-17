@@ -1,11 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { PostService } from '../../services/post-services/post-service/post.service';
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { TagsService } from 'src/app/services/tags-services/tags-service/tags.service';
 import { SeoService } from '../../services/seo/seo.service';
+import { environment } from 'src/environments/environment';
+import { TransferState, makeStateKey } from '@angular/platform-browser';
 import { tap } from 'rxjs/internal/operators/tap';
-import { filter } from 'rxjs/internal/operators/filter';
+
+const TAGS = makeStateKey('tags');
 
 @Component({
   selector: 'app-page-post',
@@ -15,17 +16,20 @@ import { filter } from 'rxjs/internal/operators/filter';
 export class PagePostComponent implements OnInit {
 
   @Input() post;
-  posts;
   tags;
+  environment;
 
   constructor(private tagsService: TagsService,
               private seoService: SeoService,
+              private state: TransferState,
               private domSanitizer: DomSanitizer) {
+                this.environment = environment;
               }
 
   ngOnInit() {
     this._getTags();
     this._setMetaInfo(this.post);
+    this._setJSONLDMarkup(this.post);
   }
 
   public getImageMain() {
@@ -37,20 +41,55 @@ export class PagePostComponent implements OnInit {
   }
 
   private _getTags() {
-    this.tagsService.getTags().subscribe(
-      (tags) => {
-        this.tags = tags;
-      }
-    );
+    this.tags = this.state.get(TAGS, null);
+    if (!this.tags) {
+      this.tagsService.getTags().pipe(
+        tap(o => this.tags = o),
+        tap(o => this.state.set(TAGS, o))
+      ).subscribe();
+    }
   }
 
   private _setMetaInfo(post) {
-    this.seoService.setTitle(post.title);
     this.seoService.setMetaTags({
       title: post.title,
       description: post.paragraphs[0].content,
+      parent: post.parent,
       slug: post.slug,
       image: post.image
     });
+  }
+
+  private _setJSONLDMarkup(post) {
+    const json = {
+      '@context': 'https://schema.org/',
+      '@type': 'Product',
+      image: post.image,
+      name: post.title,
+      review: {
+        '@type': 'Review',
+        reviewRating: {
+          '@type': 'Rating',
+          ratingValue: post.analysis.score,
+          bestRating: 10,
+          worstRating: 0
+        },
+        name: post.title,
+        author: {
+          '@type': 'Person',
+          name: post.author.firstname + ' ' + post.author.lastname
+        },
+        reviewBody: post.paragraphs.map(p => p.content).join(''),
+        publisher: {
+          '@type': 'Organization',
+          name: 'Camisetasbasicas.online'
+        }
+      },
+      brand: {
+        '@type': 'Brand',
+        logo: this.environment.staticURL + post.parent.image
+      }
+    };
+    this.seoService.setJSONLDMarkups(json);
   }
 }

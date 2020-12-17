@@ -6,7 +6,7 @@
             </a>
             <div>
                 <div>
-                    <a [routerLink]="['/tag', tag.content]" *ngFor="let tag of featuredReviews[0]?.tags?.slice(0,3)">{{tag.content}}</a>
+                    <a [routerLink]="['/tag', tag.content]" *ngFor="let tag of featuredReviews[0]?.tags?.slice(0,5)">{{tag.content}}</a>
                 </div>
                 <a [routerLink]="[(featuredReviews[0]?.parent ? '/' + featuredReviews[0].parent.slug : null) + '/' + featuredReviews[0].slug]">
                     <p>{{featuredReviews[0].title}}</p>
@@ -23,7 +23,7 @@
                     </a>
                     <div>
                         <div>
-                            <a [routerLink]="['/tag', featuredReviews[1]?.tags[0]?.content]" *ngFor="let tag of featuredReviews[1]?.tags?.slice(0, 1)">{{tag.content}}</a>
+                            <a *ngFor="let tag of featuredReviews[1]?.tags?.slice(0, 2)" [routerLink]="['/tag', tag.content]">{{tag.content}}</a>
                         </div>
                         <a [routerLink]="[(featuredReviews[1]?.parent ? '/' + featuredReviews[1].parent.slug : null) + '/' + featuredReviews[1].slug]">
                             <p>{{featuredReviews[1].title}}</p>
@@ -38,7 +38,7 @@
                     </a>
                     <div>
                         <div>
-                            <a [routerLink]="['/tag', featuredReviews[2]?.tags[0]?.content]" *ngFor="let tag of featuredReviews[2]?.tags?.slice(0, 1)">{{tag.content}}</a>
+                            <a *ngFor="let tag of featuredReviews[2]?.tags?.slice(0, 2)" [routerLink]="['/tag', tag.content]">{{tag.content}}</a>
                         </div>
                         <a [routerLink]="[(featuredReviews[2]?.parent ? '/' + featuredReviews[2].parent.slug : null) + '/' + featuredReviews[2].slug]">
                             <p>{{featuredReviews[2]?.title}}</p>
@@ -55,7 +55,7 @@
                     </a>
                     <div>
                         <div>
-                            <a [routerLink]="['/tag', featuredReviews[3]?.tags[0]?.content]" *ngFor="let tag of featuredReviews[3]?.tags?.slice(0, 3)">{{tag.content}}</a>
+                            <a *ngFor="let tag of featuredReviews[3]?.tags?.slice(0, 4)" [routerLink]="['/tag', tag]">{{tag.content}}</a>
                         </div>
                         <a [routerLink]="[(featuredReviews[3]?.parent ? '/' + featuredReviews[3].parent.slug : null) + '/' + featuredReviews[3].slug]">
                             <p>{{featuredReviews[3]?.title}}</p>

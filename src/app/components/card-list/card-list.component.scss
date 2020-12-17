@@ -4,17 +4,23 @@ section {
     flex-direction: column;
     >div {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
+        flex-wrap: wrap;
         >article {
             display: flex;
-            flex-direction: column;
-            margin: 1rem;
+            flex-direction: row;
+            margin: 1rem 0;
+            flex-basis: calc(100%);
             >figure {
                 position: relative;
+                display: flex;
+                flex-direction: column;
+                flex-basis: calc(40% - .5rem);
+                min-width: 100px;
                 border-radius: .5rem;
-                margin: 0;
+                margin: 0 .5rem 0 0;
                 overflow: hidden;
-                height: 150px;
+                height: 100px;
                 >a {
                     display: flex;
                     flex-direction: column;
@@ -23,6 +29,7 @@ section {
                         width: 100%;
                         height: 100%;
                         object-fit: cover;
+                        object-position: top;
                         transition: all .25s ease;
                     }
                 }
@@ -30,7 +37,7 @@ section {
                     position: absolute;
                     bottom: 15px;
                     left: 15px;
-                    display: flex;
+                    display: none;
                     flex-direction: row;
                     >a {
                         font-size: 1rem;
@@ -40,6 +47,33 @@ section {
                         border-radius: 10rem;
                         color: $light-color;
                         background-color: rgba($dark-color, .5);
+                    }
+                }
+                >span {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    background-color: rgba($yellow, 1);
+                    color: rgba($white, 1);
+                    font-size: 1.4rem;
+                    font-weight: 500;
+                    text-shadow: 0 0 2px rgba($dark-color, .5);
+                    box-shadow: 0 0 10px rgba($dark-color, .5);
+                    padding: 0 .75rem;
+                    height: 25px;
+                    border-radius: 0 0 0 .5rem;
+                    &.green {
+                        background-color: rgba($green, 1);
+                    }
+                    &.yellow {
+                        background-color: rgba($yellow, 1);
+                    }
+                    &.red {
+                        background-color: rgba($red, 1);
                     }
                 }
                 &:hover {
@@ -53,6 +87,7 @@ section {
             >div {
                 display: flex;
                 flex-direction: column;
+                flex-basis: 60%;
                 >a {
                     text-decoration: none;
                     >p {
@@ -98,7 +133,21 @@ section {
             flex-direction: row;
             flex-wrap: wrap;
             >article {
-                flex-basis: calc(50% - 2rem);
+                flex-direction: column;
+                flex-basis: 50%;
+                margin: 0;
+                >figure {
+                    height: 200px;
+                    margin: 0 1rem;
+                    min-width: unset;
+                    flex-basis: unset;
+                    >div {
+                        display: flex;
+                    }
+                }
+                >div {
+                    margin: 0 1rem;
+                }
             }
         }
     }
@@ -108,7 +157,7 @@ section {
     section {
         >div {
             >article {
-                flex-basis: calc(25% - 2rem);
+                flex-basis: 25%;
             }
         }
     }

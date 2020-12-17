@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { PostDaoService } from '../../../dao/post-dao-services/post-dao-service/post-dao.service';
 import { map,  tap} from 'rxjs/internal/operators';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -10,8 +11,8 @@ export class PostService {
 
   public getPost(slug) {
     return this.postDaoService.getPost(slug).pipe(
-        tap(o => console.dir(o)),
-        map(o => o['data']['getPostBySlug'])
+      tap(o => console.dir(o)),
+      map(o => o['data']['getPostBySlug'])
     );
   }
   public getLastReviews() {
@@ -48,6 +49,12 @@ export class PostService {
     return this.postDaoService.getPostsByTags(tags).pipe(
       tap(o => console.dir(o)),
       map(o => o['data']['getPostsByTags'])
+    );
+  }
+  public getPostsByScore() {
+    return this.postDaoService.getPostsByScore().pipe(
+      tap(o => console.dir(o)),
+      map(o => o['data']['getPostsByScore'])
     );
   }
 }

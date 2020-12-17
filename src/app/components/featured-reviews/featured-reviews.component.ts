@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { PostService } from '../../services/post-services/post-service/post.service';
 
 @Component({
   selector: 'app-featured-reviews',

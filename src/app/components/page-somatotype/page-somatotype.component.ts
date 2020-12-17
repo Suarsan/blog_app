@@ -1,8 +1,13 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, PLATFORM_ID, Inject } from '@angular/core';
 import { PostService } from 'src/app/services/post-services/post-service/post.service';
-import { tap } from 'rxjs/internal/operators';
+import { tap, take } from 'rxjs/internal/operators';
 import { SeoService } from 'src/app/services/seo/seo.service';
 import { environment } from 'src/environments/environment';
+import { TransferState, makeStateKey } from '@angular/platform-browser';
+import { Subscription } from 'rxjs/internal/Subscription';
+import { isPlatformServer } from '@angular/common';
+
+const POSTS = makeStateKey('posts');
 
 @Component({
   selector: 'app-page-somatotype',
@@ -11,38 +16,46 @@ import { environment } from 'src/environments/environment';
 })
 export class PageSomatotypeComponent implements OnInit, OnChanges {
 
-  environment;
   @Input() post;
   posts;
+  environment;
+  routerSubscription: Subscription;
 
   constructor(private postService: PostService,
-              private seoService: SeoService) {
+              @Inject(PLATFORM_ID) private platformId: any,
+              private seoService: SeoService,
+              private state: TransferState) {
                 this.environment = environment;
               }
 
-  ngOnInit(): void {
-      this._getPostsByTags();
-      this._setMetaInfo(this.post);
+  ngOnInit() {
   }
 
   ngOnChanges() {
-    if (this.post) {
-      this._getPostsByTags();
-    }
+    this._getPostsByTags();
+    this._setMetaInfo(this.post);
   }
+
   private _getPostsByTags() {
-    this.postService.getPostsByTags(this.post.tags.map(t => t.content)).pipe(
-      tap(o => this.posts = o)
-    ).subscribe();
+    this.posts = this.state.get(POSTS, null);
+    if (!this.posts) {
+      this.postService.getPostsByTags(this.post.tags.map(t => t.content)).pipe(
+        take(1),
+        tap(o => this.posts = o),
+        tap(o => isPlatformServer(this.platformId) ? this.state.set(POSTS, o) : null)
+      ).subscribe();
+    } else {
+      this.state.set(POSTS, null);
+    }
   }
 
   private _setMetaInfo(post) {
-    // this.seoService.setTitle('Mejores camisetas básicas de la marca ' + post.title);
-    // this.seoService.setMetaTags({
-    //   title: post.title,
-    //   description: post.paragraphs[0].content,
-    //   slug: post.slug
-    // });
+    this.seoService.setMetaTags({
+      title: post.title,
+      description: post.paragraphs && (post.paragraphs.length > 0) ? post.paragraphs[0].content : null,
+      slug: post.slug,
+      parent: post.parent
+    });
   }
 
 }

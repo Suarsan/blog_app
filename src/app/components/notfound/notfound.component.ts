@@ -17,7 +17,6 @@ export class NotfoundComponent implements OnInit {
 
   ngOnInit(): void {
     if (isPlatformServer(this.platformId)) {
-      console.dir('enviando error');
       this.response.status(404);
     }
   }

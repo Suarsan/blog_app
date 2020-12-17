@@ -1,7 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { PostService } from 'src/app/services/post-services/post-service/post.service';
-import { tap, filter, flatMap } from 'rxjs/internal/operators';
+import { tap, take, map, flatMap, filter } from 'rxjs/internal/operators';
+import { TransferState, makeStateKey } from '@angular/platform-browser';
+import { isPlatformServer } from '@angular/common';
+
+const POST = makeStateKey('post');
 
 @Component({
   selector: 'app-page',
@@ -14,22 +18,40 @@ export class PageComponent implements OnInit, OnDestroy {
   routerSubscription;
 
   constructor(private activatedRoute: ActivatedRoute,
+              @Inject(PLATFORM_ID) private platformId: any,
               private router: Router,
-              private postService: PostService) { }
+              private postService: PostService,
+              private state: TransferState) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this._getPost();
+    this._routerSubscription();
+  }
+
+  private _routerSubscription() {
     this.routerSubscription = this.router.events.pipe(
       filter(o => o instanceof NavigationEnd),
+      tap(o => this.post = null),
+      tap(o => this.state.set(POST, null)),
       tap(o => this._getPost())
     ).subscribe();
   }
 
   private _getPost() {
-    this.activatedRoute.url.pipe(
-      flatMap(o => this.postService.getPost(o[o.length - 1].path)),
-      tap(post => post ? this.post = post : this.router.navigate(['/404']))
-    ).subscribe();
+    this.post = this.state.get(POST, null);
+    if (!this.post) {
+      this.getPostPath().pipe(
+        flatMap(path => this.postService.getPost(path)),
+        tap(post => isPlatformServer(this.platformId) ? this.state.set(POST, post) : null),
+        tap(post => post ? this.post = post : this.router.navigate(['/404']))
+      ).subscribe();
+    } else {
+      this.state.set(POST, null);
+    }
+  }
+
+  private getPostPath() {
+    return this.activatedRoute.url.pipe(take(1), map(path => path[path.length - 1].path));
   }
 
   ngOnDestroy() {

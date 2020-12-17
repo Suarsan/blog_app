@@ -15,7 +15,6 @@ export class LegalComponent implements OnInit {
   }
 
   private _setMetaInfo() {
-    this.seoService.setTitle('Temas legales · camisetasbaiscas.online');
     this.seoService.setMetaTags({
       title: 'Temas legales · camisetasbaiscas.online',
       description: 'Toda la información disponible acerca de los temas legales y políticas asociadas con el sitio www.camisetasbasicas.online',

@@ -15,7 +15,6 @@ export class DirectoryComponent implements OnInit {
     this.environment = environment;
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit() { }
 
 }

@@ -15,7 +15,6 @@ export class LoyaltyPrivacyComponent implements OnInit {
   }
 
   private _setMetaInfo() {
-    this.seoService.setTitle('Politicas de privacidad · camisetasbaiscas.online');
     this.seoService.setMetaTags({
       title: 'Políticas de privacidad · camisetasbaiscas.online',
       description: 'Toda la información disponible acerca de los políticas de privacidad asociadas al sitio www.camisetasbasicas.online',

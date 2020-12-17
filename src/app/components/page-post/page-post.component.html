@@ -1,7 +1,9 @@
 <div>
     <article>
         <div [style.backgroundImage]="getImageMain()">
-            <span>{{post?.type.content}}</span>
+            <div>
+                <span>{{post?.type.content}}</span>
+            </div>
             <h1>{{post?.title}}</h1>
             <ul>
                 <li *ngFor="let tag of post?.tags">
@@ -17,7 +19,10 @@
                     <p *ngIf="paragraph?.htmlTag.content == 'paragraph'" [innerHtml]="paragraph.content"></p>
                     <strong *ngIf="paragraph?.htmlTag.content == 'quote'" [innerHtml]="paragraph.content"></strong>
                     <span *ngIf="paragraph?.htmlTag.content == 'summary'" [innerHtml]="paragraph.content"></span>
-                    <img *ngIf="paragraph?.htmlTag.content == 'image'" [src]="paragraph.content" [alt]="paragraph.content">
+                    <img *ngIf="paragraph?.htmlTag.content == 'image'" [src]="environment.staticURL + paragraph.content" [alt]="environment.staticURL + paragraph.content">
+                    <div *ngIf="paragraph?.htmlTag.content == 'images'">
+                        <img *ngFor="let image of paragraph.content.split(';')" [src]="environment.staticURL + image" [alt]="environment.staticURL + image">
+                    </div>
                 </ng-container>
             </div>
             <aside>

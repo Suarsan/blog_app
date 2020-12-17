@@ -15,7 +15,6 @@ export class LoyaltyCookiesComponent implements OnInit {
   }
 
   private _setMetaInfo() {
-    this.seoService.setTitle('Política de cookies · camisetasbaiscas.online');
     this.seoService.setMetaTags({
       title: 'Política de cookies · camisetasbaiscas.online',
       description: 'Toda la información disponible acerca de las cookies y políticas asociadas del sitio www.camisetasbasicas.online',

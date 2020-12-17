@@ -1,16 +1,13 @@
-<section>
-    <header>
-        <h2>RELACIONADOS</h2>
-    </header>
+<div>
     <div>
         <article *ngFor="let post of posts?.slice(0,3)">
             <div>
-                <a [routerLink]="['/' + post.slug]">
-                    <img [src]="post?.image" [alt]="post?.title">
+                <a [routerLink]="[(post?.parent ? '/' + post?.parent.slug : null) + '/' + post?.slug]">
+                    <img [src]="post?.image" [alt]="[(post?.parent ? '/' + post?.parent.slug : null) + '/' + post?.slug]">
                 </a>
             </div>
             <div>
-                <a [routerLink]="['/' + post.slug]">
+                <a [routerLink]="[(post?.parent ? '/' + post?.parent.slug : null) + '/' + post?.slug]">
                     <p>{{post?.title}}</p>
                 </a>
                 <div>
@@ -24,4 +21,4 @@
             </div>
         </article>
     </div>
-</section>
+</div>

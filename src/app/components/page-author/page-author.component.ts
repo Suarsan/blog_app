@@ -3,6 +3,9 @@ import { PostService } from 'src/app/services/post-services/post-service/post.se
 import { ActivatedRoute } from '@angular/router';
 import { tap } from 'rxjs/internal/operators/tap';
 import { SeoService } from 'src/app/services/seo/seo.service';
+import { TransferState, makeStateKey } from '@angular/platform-browser';
+
+const POSTS = makeStateKey('posts');
 
 @Component({
   selector: 'app-page-author',
@@ -16,7 +19,8 @@ export class PageAuthorComponent implements OnInit {
 
   constructor(private postService: PostService,
               private seoService: SeoService,
-              private activatedRoute: ActivatedRoute) { }
+              private activatedRoute: ActivatedRoute,
+              private state: TransferState) { }
 
   ngOnInit(): void {
     const params = this.activatedRoute.snapshot.params['author'];
@@ -27,14 +31,17 @@ export class PageAuthorComponent implements OnInit {
   }
 
   private _getPostsByAuthor(firstname, lastname) {
-    this.postService.getPostsByAuthor(firstname, lastname).pipe(
-      tap(o => this.posts = o),
-      tap(o => this._setMetaInfo(o))
-    ).subscribe();
+    this.posts = this.state.get(POSTS, null);
+    if (!this.posts) {
+      this.postService.getPostsByAuthor(firstname, lastname).pipe(
+        tap(o => this.posts = o),
+        tap(o => this.state.set(POSTS, o)),
+        tap(o => this._setMetaInfo(o))
+      ).subscribe();
+    }
 }
 
-private _setMetaInfo(post) {
-  this.seoService.setTitle('Articulos escritos por ' + this.author + ' sobre camisetas básicas');
+private _setMetaInfo(posts) {
   this.seoService.setMetaTags({
     title: 'Articulos escritos por ' + this.author + ' sobre camisetas básicas',
     description: 'Todos los articulos escritos por ' + this.author + ' sobre camisetas básicas · Camisetas básicas online',

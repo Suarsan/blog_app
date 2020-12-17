@@ -16,12 +16,16 @@ div {
             overflow: hidden;
             padding: 1rem 2rem;
             margin-top: 0;
-            >span {
-                font-size: 1.8rem;
-                font-weight: 500;
-                color: rgba($light-color, .75);
-                margin: 0 0 .25rem 0;
-                letter-spacing: .5rem;
+            >div {
+                display: flex;
+                flex-direction: row;
+                >span {
+                    font-size: 1.8rem;
+                    font-weight: 500;
+                    color: rgba($light-color, .75);
+                    margin: 0 0 .25rem 0;
+                    letter-spacing: .5rem;
+                }
             }
             >h1 {
                 font-size: 2.4rem;
@@ -100,16 +104,18 @@ div {
                 >div {
                     display: flex;
                     flex-direction: row;
-                    justify-content: space-between;
-                    >a {
-                        font-size: 1.5rem;
-                        font-weight: 500;
-                        margin-top: 5rem;
+                    align-self: flex-start;
+                    justify-content: space-around;
+                    >img {
+                        width: min-content;
+                        max-width: calc(50% - 2rem);
+                        margin: 1rem;
                     }
                 }
                 >img {
                     max-width: 100%;
-                    margin: 2rem 1rem 2rem 1rem;
+                    width: min-content;
+                    align-self: center;
                 }
             }
             >aside {
@@ -130,29 +136,29 @@ div {
         >article {
             >div:nth-of-type(1) {
                 padding: 5rem 10rem 5rem 15rem;
-                margin-top: 5rem;
                 >span {
                     font-size: 2rem;
                     margin-bottom: 1rem;
                 }
-                >h1 {
-                    font-size: 3rem;
-                }
-                >ul {
-                    margin: 0;
-                    >li {
-                        font-size: 1.25rem;
-                        margin: 0 .25rem;
+                >div {
+                    >h1 {
+                        font-size: 3rem;
+                    }
+                    >ul {
+                        margin: 0;
+                        >li {
+                            font-size: 1.25rem;
+                            margin: 0 .25rem;
+                        }
                     }
                 }
             }
             >div:nth-of-type(2) {
                 flex-direction: row;
-                max-width: 750px;
                 >div {
                     display: flex;
                     flex-direction: column;
-                    flex-basis: 60%;
+                    flex-basis: calc(60% - 10rem);
                     margin: 10rem 5rem 0 5rem;
                     order: 2;
                 }
@@ -160,7 +166,7 @@ div {
                     display: flex;
                     flex-direction: column;
                     justify-content: space-between;
-                    flex-basis: 30%;
+                    flex-basis: calc(25% - 5rem);
                     margin: 10rem 0 0 5rem;
                     order: 1;
                     >div {
@@ -179,9 +185,7 @@ div {
 @media screen and (min-width: 991px) {
     div {
         >article {
-            >div:nth-of-type(2) {
-                max-width: 900px;
-            }
+            >div:nth-of-type(2) {}
             >div:nth-of-type(3) {
                 margin: 0 5rem;
             }
@@ -192,9 +196,7 @@ div {
 @media screen and (min-width: 1200px) {
     div {
         >article {
-            >div:nth-of-type(2) {
-                max-width: 1000px;
-            }
+            >div:nth-of-type(2) {}
             >div:nth-of-type(3) {
                 margin: 0 5rem;
             }

@@ -1,8 +1,8 @@
 @import '../../../colors';
-section {
+div {
     display: flex;
     flex-direction: column;
-    margin: 1rem;
+    border-radius: 1rem;
     >header {
         display: flex;
         flex-direction: row;
@@ -10,9 +10,8 @@ section {
         align-items: center;
         background-color: rgba($yellow, 1);
         padding: 2rem 0;
-        margin-bottom: 3rem;
         border-radius: 1rem;
-        box-shadow: 1px 4px 8px 1px rgba(0, 0, 0, .12);
+        z-index: 1;
         >mark {
             font-size: 3.5rem;
             font-weight: 600;
@@ -30,11 +29,13 @@ section {
             }
         }
     }
-    >article {
+    >div {
         display: flex;
         flex-direction: column;
-        background-color: rgba($light-color, .75);
+        background-color: rgba($light-color, 1);
         border-radius: 1rem;
+        margin-top: -5rem;
+        padding-top: 5rem;
         >dl {
             display: flex;
             flex-direction: column;

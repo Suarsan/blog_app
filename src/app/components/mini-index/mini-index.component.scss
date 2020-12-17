@@ -1,17 +1,7 @@
 @import '../../../colors';
-section {
+div {
     display: flex;
     flex-direction: column;
-    >header {
-        display: flex;
-        flex-direction: row;
-        border-bottom: 2px solid #f0f0f0;
-        margin: 3rem 0;
-        >h2 {
-            font-size: 1.8rem;
-            font-weight: 500;
-        }
-    }
     >div {
         display: flex;
         flex-direction: column;
