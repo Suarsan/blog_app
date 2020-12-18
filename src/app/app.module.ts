@@ -9,7 +9,6 @@ import { LogoComponent } from './components/logo/logo.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { DateTransformPipe } from './pipes/date-transform.pipe';
 import { HttpClientModule } from '@angular/common/http';
-import { GraphQLModule } from './graphql.module';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 
 @NgModule({
@@ -26,7 +25,6 @@ import { NotfoundComponent } from './components/notfound/notfound.component';
     BrowserModule.withServerTransition({ appId: 'bloggraphql' }),
     AppRoutingModule,
     HttpClientModule,
-    GraphQLModule,
     BrowserTransferStateModule
   ],
   providers: [],

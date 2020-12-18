@@ -27,18 +27,14 @@
     "@angular/platform-server": "~11.0.5",
     "@angular/router": "~11.0.5",
     "@nguniversal/express-engine": "^11.0.1",
-    "apollo-angular": "^1.10.0",
-    "apollo-angular-link-http": "^1.11.0",
-    "apollo-cache-inmemory": "^1.6.0",
-    "apollo-client": "^2.6.0",
-    "apollo-link": "^1.2.11",
+    "apollo-angular": "^2.1.0",
     "express": "^4.15.2",
-    "graphql": "^14.5.0",
-    "graphql-tag": "^2.10.0",
+    "graphql": "^15.0.0",
     "moment": "^2.24.0",
     "rxjs": "~6.6.3",
     "tslib": "^2.0.0",
-    "zone.js": "~0.10.2"
+    "zone.js": "~0.10.2",
+    "@apollo/client": "^3.0.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.1100.5",
