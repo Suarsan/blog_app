@@ -6,7 +6,7 @@
         <p *ngIf="paragraph?.htmlTag.content == 'paragraph'" [innerHtml]="paragraph.content"></p>
         <strong *ngIf="paragraph?.htmlTag.content == 'quote'" [innerHtml]="paragraph.content"></strong>
         <span *ngIf="paragraph?.htmlTag.content == 'summary'" [innerHtml]="paragraph.content"></span>
-        <img *ngIf="paragraph?.htmlTag.content == 'image'" [src]="paragraph.content" [alt]="paragraph.content">
+        <img *ngIf="paragraph?.htmlTag.content == 'image'" [src]="paragraph.content" [alt]="paragraph.content" loading="lazy">
     </ng-container>
 </div>
 <div>
@@ -19,6 +19,6 @@
         <p *ngIf="paragraph?.htmlTag.content == 'paragraph'" [innerHtml]="paragraph.content"></p>
         <strong *ngIf="paragraph?.htmlTag.content == 'quote'" [innerHtml]="paragraph.content"></strong>
         <span *ngIf="paragraph?.htmlTag.content == 'summary'" [innerHtml]="paragraph.content"></span>
-        <img *ngIf="paragraph?.htmlTag.content == 'image'" [src]="paragraph.content" [alt]="paragraph.content">
+        <img *ngIf="paragraph?.htmlTag.content == 'image'" [src]="paragraph.content" [alt]="paragraph.content" loading="lazy">
     </ng-container>
 </div>

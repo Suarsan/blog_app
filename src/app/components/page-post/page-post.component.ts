@@ -1,59 +1,40 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnChanges, Input } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { TagsService } from 'src/app/services/tags-services/tags-service/tags.service';
 import { SeoService } from '../../services/seo/seo.service';
 import { environment } from 'src/environments/environment';
-import { TransferState, makeStateKey } from '@angular/platform-browser';
-import { tap } from 'rxjs/internal/operators/tap';
 
-const TAGS = makeStateKey('tags');
 
 @Component({
   selector: 'app-page-post',
   templateUrl: './page-post.component.html',
   styleUrls: ['./page-post.component.scss']
 })
-export class PagePostComponent implements OnInit {
+export class PagePostComponent implements OnChanges {
 
   @Input() post;
   tags;
   environment;
 
-  constructor(private tagsService: TagsService,
-              private seoService: SeoService,
-              private state: TransferState,
+  constructor(private seoService: SeoService,
               private domSanitizer: DomSanitizer) {
                 this.environment = environment;
               }
 
-  ngOnInit() {
-    this._getTags();
+  ngOnChanges() {
     this._setMetaInfo(this.post);
     this._setJSONLDMarkup(this.post);
   }
 
   public getImageMain() {
     if (this.post) {
-      return this.domSanitizer.bypassSecurityTrustStyle(
-        'linear-gradient(to bottom, rgba(50, 50, 50, 0) 0%, rgba(16, 15, 15, .91) 89%, rgba(16, 15, 15, .93) 93%), url(' 
-        + this.post?.image + ')');
-    }
-  }
-
-  private _getTags() {
-    this.tags = this.state.get(TAGS, null);
-    if (!this.tags) {
-      this.tagsService.getTags().pipe(
-        tap(o => this.tags = o),
-        tap(o => this.state.set(TAGS, o))
-      ).subscribe();
+      return this.domSanitizer.bypassSecurityTrustStyle('linear-gradient(to bottom, rgba(50, 50, 50, 0) 0%, rgba(16, 15, 15, .91) 89%, rgba(16, 15, 15, .93) 93%), url(' + this.post?.image + ')');
     }
   }
 
   private _setMetaInfo(post) {
     this.seoService.setMetaTags({
-      title: post.title,
-      description: post.paragraphs[0].content,
+      title: post.metaTitle,
+      description: post.metaDescription,
       parent: post.parent,
       slug: post.slug,
       image: post.image

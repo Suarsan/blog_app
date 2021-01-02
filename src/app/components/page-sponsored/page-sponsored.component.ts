@@ -1,17 +1,14 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-page-sponsored',
   templateUrl: './page-sponsored.component.html',
   styleUrls: ['./page-sponsored.component.scss']
 })
-export class PageSponsoredComponent implements OnInit {
+export class PageSponsoredComponent {
 
   @Input() post;
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }

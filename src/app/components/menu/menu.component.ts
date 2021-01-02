@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PostService } from '../../services/post-services/post-service/post.service';
-import { tap, take } from 'rxjs/internal/operators';
+import { tap, take } from 'rxjs/operators';
 import { TransferState, makeStateKey } from '@angular/platform-browser';
 
 const BRANDS = makeStateKey('brands');
@@ -33,7 +33,7 @@ export class MenuComponent implements OnInit {
     if (!this.brands) {
       this.postService.getBrands().pipe(
         take(1),
-        tap(o => this.brands = o.sort((a, b) =>  a.title.toLowerCase() === b.title.toLowerCase() ? 0 : a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1 )),
+        tap(o => this.brands = o),
         tap(o => this.state.set(BRANDS, this.brands))
         ).subscribe();
     }

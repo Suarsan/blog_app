@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { tap } from 'rxjs/internal/operators/tap';
-import { map } from 'rxjs/internal/operators/map';
+import { tap, map } from 'rxjs/operators';
 import { TagsDaoService } from 'src/app/dao/tags-dao-services/tags-dao-service/tags-dao.service';
 
 @Injectable({

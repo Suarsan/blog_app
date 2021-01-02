@@ -1,3 +1,66 @@
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url('assets/fonts/montserrat-v15-latin-300.eot');
+    src: local(''), url('assets/fonts/montserrat-v15-latin-300.eot?#iefix') format('embedded-opentype'), url('assets/fonts/montserrat-v15-latin-300.woff2') format('woff2'), url('assets/fonts/montserrat-v15-latin-300.woff') format('woff'), url('assets/fonts/montserrat-v15-latin-300.ttf') format('truetype'), url('assets/fonts/montserrat-v15-latin-300.svg#Montserrat') format('svg');
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('assets/fonts/montserrat-v15-latin-regular.eot');
+    src: local(''), url('assets/fonts/montserrat-v15-latin-regular.eot?#iefix') format('embedded-opentype'), url('assets/fonts/montserrat-v15-latin-regular.woff2') format('woff2'), url('assets/fonts/montserrat-v15-latin-regular.woff') format('woff'), url('assets/fonts/montserrat-v15-latin-regular.ttf') format('truetype'), url('assets/fonts/montserrat-v15-latin-regular.svg#Montserrat') format('svg');
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('assets/fonts/montserrat-v15-latin-500.eot');
+    src: local(''), url('assets/fonts/montserrat-v15-latin-500.eot?#iefix') format('embedded-opentype'), url('assets/fonts/montserrat-v15-latin-500.woff2') format('woff2'), url('assets/fonts/montserrat-v15-latin-500.woff') format('woff'), url('assets/fonts/montserrat-v15-latin-500.ttf') format('truetype'), url('assets/fonts/montserrat-v15-latin-500.svg#Montserrat') format('svg');
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url('assets/fonts/montserrat-v15-latin-600.eot');
+    src: local(''), url('assets/fonts/montserrat-v15-latin-600.eot?#iefix') format('embedded-opentype'), url('assets/fonts/montserrat-v15-latin-600.woff2') format('woff2'), url('assets/fonts/montserrat-v15-latin-600.woff') format('woff'), url('assets/fonts/montserrat-v15-latin-600.ttf') format('truetype'), url('assets/fonts/montserrat-v15-latin-600.svg#Montserrat') format('svg');
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 800;
+    font-display: swap;
+    src: url('assets/fonts/montserrat-v15-latin-800.eot');
+    src: local(''), url('assets/fonts/montserrat-v15-latin-800.eot?#iefix') format('embedded-opentype'), url('assets/fonts/montserrat-v15-latin-800.woff2') format('woff2'), url('assets/fonts/montserrat-v15-latin-800.woff') format('woff'), url('assets/fonts/montserrat-v15-latin-800.ttf') format('truetype'), url('assets/fonts/montserrat-v15-latin-800.svg#Montserrat') format('svg');
+}
+
+@font-face {
+    font-family: 'Maven Pro';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('assets/fonts/maven-pro-v21-latin-regular.eot');
+    src: local(''), url('assets/fonts/maven-pro-v21-latin-regular.eot?#iefix') format('embedded-opentype'), url('assets/fonts/maven-pro-v21-latin-regular.woff2') format('woff2'), url('assets/fonts/maven-pro-v21-latin-regular.woff') format('woff'), url('assets/fonts/maven-pro-v21-latin-regular.ttf') format('truetype'), url('assets/fonts/maven-pro-v21-latin-regular.svg#MavenPro') format('svg');
+}
+
+@font-face {
+    font-family: 'Maven Pro';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url('assets/fonts/maven-pro-v21-latin-600.eot');
+    src: local(''), url('assets/fonts/maven-pro-v21-latin-600.eot?#iefix') format('embedded-opentype'), url('assets/fonts/maven-pro-v21-latin-600.woff2') format('woff2'), url('assets/fonts/maven-pro-v21-latin-600.woff') format('woff'), url('assets/fonts/maven-pro-v21-latin-600.ttf') format('truetype'), url('assets/fonts/maven-pro-v21-latin-600.svg#MavenPro') format('svg');
+}
+
 @import './colors';
 html {
     min-height: 100%;
@@ -18,16 +81,19 @@ body {
 
 h1 {
     font-size: 2rem;
-    font-weight: 400;
+    font-weight: 500;
 }
 
 h2 {
-    font-size: 2rem;
+    font-size: 1.6rem;
     font-weight: 600;
+    padding-bottom: 1rem;
+    margin-bottom: -2px;
+    border-bottom: 2px solid $dark-color;
 }
 
 h3 {
-    font-size: 1.8rem;
+    font-size: 1.4rem;
     font-weight: 500;
 }
 
@@ -46,6 +112,10 @@ h6 {
 
 p {
     font-size: 1.4rem;
+}
+
+span {
+    font-size: 1.2rem;
 }
 
 a {
@@ -76,4 +146,16 @@ u {
 
 strong {
     font-size: 3rem;
+}
+
+@media screen and (min-width: 768px) {
+    h1 {
+        font-size: 3rem;
+    }
+    h2 {
+        font-size: 2rem;
+    }
+    h3 {
+        font-size: 1.6rem;
+    }
 }

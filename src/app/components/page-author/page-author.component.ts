@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { PostService } from 'src/app/services/post-services/post-service/post.service';
 import { ActivatedRoute } from '@angular/router';
-import { tap } from 'rxjs/internal/operators/tap';
+import { tap } from 'rxjs/operators';
 import { SeoService } from 'src/app/services/seo/seo.service';
 import { TransferState, makeStateKey } from '@angular/platform-browser';
+import { isPlatformServer } from '@angular/common';
 
 const POSTS = makeStateKey('posts');
 
@@ -17,7 +18,8 @@ export class PageAuthorComponent implements OnInit {
   posts;
   author;
 
-  constructor(private postService: PostService,
+  constructor(@Inject(PLATFORM_ID) private platformId: any,
+              private postService: PostService,
               private seoService: SeoService,
               private activatedRoute: ActivatedRoute,
               private state: TransferState) { }
@@ -28,24 +30,25 @@ export class PageAuthorComponent implements OnInit {
     const lastname = params.split('-')[1];
     this.author = firstname + ' ' + lastname;
     this._getPostsByAuthor(firstname, lastname);
+    this._setMetaInfo(this.author);
   }
 
   private _getPostsByAuthor(firstname, lastname) {
     this.posts = this.state.get(POSTS, null);
+    this.state.set(POSTS, null);
     if (!this.posts) {
       this.postService.getPostsByAuthor(firstname, lastname).pipe(
-        tap(o => this.posts = o),
-        tap(o => this.state.set(POSTS, o)),
-        tap(o => this._setMetaInfo(o))
+        tap(posts => this.posts = posts),
+        tap(posts => isPlatformServer(this.platformId) ? this.state.set(POSTS, posts) : null)
       ).subscribe();
     }
-}
+  }
 
-private _setMetaInfo(posts) {
-  this.seoService.setMetaTags({
-    title: 'Articulos escritos por ' + this.author + ' sobre camisetas básicas',
-    description: 'Todos los articulos escritos por ' + this.author + ' sobre camisetas básicas · Camisetas básicas online',
-    slug: 'author/' + this.activatedRoute.snapshot.params['author']
-  });
-}
+  private _setMetaInfo(author) {
+    this.seoService.setMetaTags({
+      title: 'Articulos escritos por ' + author + ' sobre camisetas básicas',
+      description: 'Todos los articulos escritos por ' + author + ' sobre camisetas básicas · Camisetas básicas online',
+      slug: 'author/' + author
+    });
+  }
 }

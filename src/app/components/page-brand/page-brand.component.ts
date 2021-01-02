@@ -1,6 +1,6 @@
-import { Component, OnInit, Input, OnChanges, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, Input, OnChanges, Inject, PLATFORM_ID } from '@angular/core';
 import { PostService } from 'src/app/services/post-services/post-service/post.service';
-import { tap, take } from 'rxjs/internal/operators';
+import { tap, take } from 'rxjs/operators';
 import { SeoService } from 'src/app/services/seo/seo.service';
 import { environment } from 'src/environments/environment';
 import { TransferState, makeStateKey } from '@angular/platform-browser';
@@ -13,10 +13,10 @@ const POSTS = makeStateKey('posts');
   templateUrl: './page-brand.component.html',
   styleUrls: ['./page-brand.component.scss']
 })
-export class PageBrandComponent implements OnInit, OnChanges {
+export class PageBrandComponent implements OnChanges {
 
-  environment;
   @Input() post;
+  environment;
   posts;
 
   constructor(private postService: PostService,
@@ -26,9 +26,6 @@ export class PageBrandComponent implements OnInit, OnChanges {
                 this.environment = environment;
               }
 
-  ngOnInit(): void {
-  }
-
   ngOnChanges() {
     this._getPostsByParent();
     this._setMetaInfo(this.post);
@@ -36,24 +33,23 @@ export class PageBrandComponent implements OnInit, OnChanges {
 
   private _getPostsByParent() {
     this.posts = this.state.get(POSTS, null);
+    this.state.set(POSTS, null);
     if (!this.posts) {
       this.postService.getPostsByParent(this.post.id).pipe(
         take(1),
-        tap(o => this.posts = o),
-        tap(o => isPlatformServer(this.platformId) ? this.state.set(POSTS, o) : null)
+        tap(posts => isPlatformServer(this.platformId) ? this.state.set(POSTS, posts) : null),
+        tap(posts => this.posts = posts)
       ).subscribe();
-    } else {
-      this.state.set(POSTS, null);
     }
   }
 
   private _setMetaInfo(post) {
     this.seoService.setMetaTags({
-      title: 'Mejores camisetas básicas de la marca ' + post.title,
-      description: post.paragraphs && (post.paragraphs.length > 0) ? post.paragraphs[0].content : null,
+      title: post.metaTitle,
+      description: post.metaDescription,
       slug: post.slug,
-      parent: post.parent
+      parent: post.parent,
+      image: post.image
     });
   }
-
 }

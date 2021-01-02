@@ -19,15 +19,14 @@
                     <p *ngIf="paragraph?.htmlTag.content == 'paragraph'" [innerHtml]="paragraph.content"></p>
                     <strong *ngIf="paragraph?.htmlTag.content == 'quote'" [innerHtml]="paragraph.content"></strong>
                     <span *ngIf="paragraph?.htmlTag.content == 'summary'" [innerHtml]="paragraph.content"></span>
-                    <img *ngIf="paragraph?.htmlTag.content == 'image'" [src]="environment.staticURL + paragraph.content" [alt]="environment.staticURL + paragraph.content">
+                    <img *ngIf="paragraph?.htmlTag.content == 'image'" [src]="environment.staticURL + paragraph.content" [alt]="environment.staticURL + paragraph.content" loading="lazy">
                     <div *ngIf="paragraph?.htmlTag.content == 'images'">
-                        <img *ngFor="let image of paragraph.content.split(';')" [src]="environment.staticURL + image" [alt]="environment.staticURL + image">
+                        <img *ngFor="let image of paragraph.content.split(';')" [src]="environment.staticURL + image" [alt]="environment.staticURL + image" loading="lazy">
                     </div>
                 </ng-container>
             </div>
             <aside>
                 <app-score-card [analysis]="post?.analysis"></app-score-card>
-                <app-mini-index [index]="tags"></app-mini-index>
             </aside>
         </div>
     </article>

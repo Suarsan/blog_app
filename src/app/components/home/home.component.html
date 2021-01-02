@@ -1,52 +1,51 @@
 <main>
+    <header>
+        <h1>Para fanáticos de las camisetas básicas</h1>
+    </header>
     <div>
-        <app-featured-reviews [featuredReviews]="lastReviews"></app-featured-reviews>
-    </div>
-    <div>
-        <h1>Encuentra las mejores camisetas básicas en 2020 al mejor precio.</h1>
-        <p>¿Quieres saber cuál es la mejor camiseta basica de manga corta para hombre? Analizamos todas las camisetas por ti para que sepas todo acerca de tu próxima compra. Formas, tejidos, marcas, colores, durabilidad, costuras, etiquetas, resistencia
-            a los lavados, precio, etc</p>
-    </div>
-    <div>
-        <header>
-            <h2>Top 10 mejor valoradas</h2>
-        </header>
-        <div>
-            <app-card-list [posts]="bestReviews"></app-card-list>
-        </div>
-    </div>
-    <div>
-        <header>
-            <h2>Últimos análisis</h2>
-        </header>
-        <div>
-            <app-card-list [posts]="lastReviews"></app-card-list>
-        </div>
-    </div>
-    <div>
-        <header>
-            <h2>Mejores marcas</h2>
-        </header>
-        <app-directory [items]="brands"></app-directory>
-    </div>
-    <div>
+        <p>Analizamos todas las camisetas básicas en venta online para que encuentres la camiseta perfecta para ti. Nuestro objetivo es encontrar la mejor camiseta básica del mercado de 2021 para hombre, para mujer y para niño o niña. Sometemos a todas las
+            camisetas a la misma batería de pruebas para obtener una nota media y un top 10 que nos permita comparar la calidad, la durabilidad y el precio de cada camiseta básica analizada. Además, te enseñaremos tratamientos, productos, detalles o cuidados
+            para que tus camisetas luzcan mejor que nunca.</p>
+        <section>
+            <app-featured-reviews [featuredReviews]="lastReviews"></app-featured-reviews>
+        </section>
+        <section>
+            <header>
+                <h2>Top 10 mejor valoradas</h2>
+            </header>
+            <div>
+                <app-card-list *ngIf="lastReviews" [posts]="bestReviews"></app-card-list>
+            </div>
+        </section>
+        <section>
+            <header>
+                <h2>Últimos análisis</h2>
+            </header>
+            <div>
+                <app-card-list *ngIf="lastReviews" [posts]="lastReviews"></app-card-list>
+            </div>
+        </section>
+        <section>
+            <header>
+                <h2>Mejores marcas</h2>
+            </header>
+            <app-directory *ngIf="lastReviews" [items]="brands"></app-directory>
+        </section>
         <div>
             <section>
                 <header>
                     <h2>Análisis más vistos</h2>
                 </header>
-                <app-mini-list [posts]="lastReviews"></app-mini-list>
+                <app-mini-list *ngIf="lastReviews" [posts]="lastReviews"></app-mini-list>
             </section>
             <section>
                 <header>
                     <h2>Etiquetas</h2>
                 </header>
-                <app-mini-index [index]="tags"></app-mini-index>
+                <app-mini-index *ngIf="lastReviews" [index]="tags"></app-mini-index>
             </section>
             <section></section>
         </div>
-    </div>
-    <div>
         <app-text-block></app-text-block>
     </div>
 </main>

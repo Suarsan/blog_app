@@ -1,6 +1,6 @@
-import { Component, OnInit, Input, OnChanges, PLATFORM_ID, Inject } from '@angular/core';
+import { Component, Input, OnChanges, PLATFORM_ID, Inject } from '@angular/core';
 import { PostService } from 'src/app/services/post-services/post-service/post.service';
-import { tap, take } from 'rxjs/internal/operators';
+import { tap, take } from 'rxjs/operators';
 import { SeoService } from 'src/app/services/seo/seo.service';
 import { environment } from 'src/environments/environment';
 import { TransferState, makeStateKey } from '@angular/platform-browser';
@@ -14,7 +14,7 @@ const POSTS = makeStateKey('posts');
   templateUrl: './page-somatotype.component.html',
   styleUrls: ['./page-somatotype.component.scss']
 })
-export class PageSomatotypeComponent implements OnInit, OnChanges {
+export class PageSomatotypeComponent implements OnChanges {
 
   @Input() post;
   posts;
@@ -28,9 +28,6 @@ export class PageSomatotypeComponent implements OnInit, OnChanges {
                 this.environment = environment;
               }
 
-  ngOnInit() {
-  }
-
   ngOnChanges() {
     this._getPostsByTags();
     this._setMetaInfo(this.post);
@@ -38,21 +35,20 @@ export class PageSomatotypeComponent implements OnInit, OnChanges {
 
   private _getPostsByTags() {
     this.posts = this.state.get(POSTS, null);
+    this.state.set(POSTS, null);
     if (!this.posts) {
       this.postService.getPostsByTags(this.post.tags.map(t => t.content)).pipe(
         take(1),
-        tap(o => this.posts = o),
-        tap(o => isPlatformServer(this.platformId) ? this.state.set(POSTS, o) : null)
+        tap(posts => isPlatformServer(this.platformId) ? this.state.set(POSTS, posts) : null),
+        tap(posts => this.posts = posts),
       ).subscribe();
-    } else {
-      this.state.set(POSTS, null);
     }
   }
 
   private _setMetaInfo(post) {
     this.seoService.setMetaTags({
-      title: post.title,
-      description: post.paragraphs && (post.paragraphs.length > 0) ? post.paragraphs[0].content : null,
+      title: post.metaTitle,
+      description: post.metaDescription,
       slug: post.slug,
       parent: post.parent
     });

@@ -1,11 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { tap } from 'rxjs/internal/operators/tap';
+import { Component, OnInit, OnDestroy, Inject, PLATFORM_ID } from '@angular/core';
+import { tap, take } from 'rxjs/operators';
 import { PostService } from 'src/app/services/post-services/post-service/post.service';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { filter } from 'rxjs/internal/operators/filter';
+import { filter } from 'rxjs/operators';
 import { SeoService } from 'src/app/services/seo/seo.service';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { TransferState, makeStateKey } from '@angular/platform-browser';
+import { isPlatformServer } from '@angular/common';
 
 const POSTS = makeStateKey('posts');
 
@@ -20,17 +21,18 @@ export class PageTagComponent implements OnInit, OnDestroy {
   tag;
   routerSubscription: Subscription;
 
-  constructor(private postService: PostService,
+  constructor(@Inject(PLATFORM_ID) private platformId: object,
+              private postService: PostService,
               private router: Router,
               private seoService: SeoService,
               private state: TransferState,
-              private activatedRoute: ActivatedRoute) {
-                this._routerSubscription();
-              }
+              private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.tag = this.activatedRoute.snapshot.params['tag'];
     this._getPostsByTag(this.tag);
+    this._setMetaInfo(this.tag);
+    this._routerSubscription();
   }
 
   private _routerSubscription() {
@@ -42,13 +44,22 @@ export class PageTagComponent implements OnInit, OnDestroy {
   }
 
   private _getPostsByTag(tag) {
-    this.posts = this.state.get(POSTS, null);
-    if (!this.posts) {
+    if (isPlatformServer(this.platformId)) {
       this.postService.getPostsByTag(tag).pipe(
+        take(1),
         tap(o => this.posts = o),
-        tap(o => this.state.set(POSTS, o)),
-        tap(o => this._setMetaInfo(o))
+        tap(o => this.state.set(POSTS, o))
       ).subscribe();
+    } else {
+      if (this.state.get(POSTS, null)) {
+        this.posts = this.state.get(POSTS, null);
+      } else {
+          this.postService.getPostsByTag(tag).pipe(
+            take(1),
+            tap(o => this.posts = o),
+            tap(o => this.state.set(POSTS, null)),
+          ).subscribe();
+      }
     }
   }
 

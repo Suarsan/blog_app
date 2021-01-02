@@ -1,111 +1,75 @@
 @import '../../../colors';
-main {
+:host {
     display: flex;
     flex-direction: column;
-    >div {
+    >main {
         display: flex;
         flex-direction: column;
         margin: 0 1rem;
-        &:nth-of-type(1) {
-            margin: 0;
-        }
-        >div {
-            display: flex;
-            flex-direction: column;
-            flex-wrap: wrap;
-            >section {
-                display: flex;
-                flex-direction: column;
-            }
-        }
         header {
             display: flex;
-            flex-direction: row;
-            border-bottom: 2px solid $light-color;
-            margin: 3rem 2rem 3rem 0;
-            >h2 {
-                padding-bottom: 1rem;
-                margin: 0 0 -2px 0;
-                border-bottom: 2px solid $dark-color;
+            flex-direction: column;
+        }
+        div {
+            display: flex;
+            flex-direction: column;
+        }
+        section {
+            display: flex;
+            flex-direction: column;
+            >header {
+                flex-direction: row;
+                border-bottom: 2px solid $light-color;
+                margin: 3rem 0 1rem 0;
             }
-        }
-        h1 {
-            font-size: 2rem;
-            font-weight: 500;
-            margin: 1rem 0 .5rem 0;
-        }
-        h2 {
-            font-size: 1.6rem;
-            padding-bottom: 1rem;
-            margin: 3rem 0 2rem 0;
-            border-bottom: 2px solid $dark-color;
-        }
-        p {
-            font-size: 1.4rem;
-            font-weight: 300;
-            margin: 0;
-        }
-        >app-featured-reviews {
-            width: 100%;
-        }
-        >app-directory {
-            width: 100%;
-        }
-        >app-card-list {
-            width: 100%;
+            app-featured-reviews {
+                margin: 0 -1rem;
+            }
         }
     }
 }
 
 @media screen and (min-width: 768px) {
-    main {
-        display: flex;
-        flex-direction: column;
-        padding: 0 3rem;
-        >div {
+     :host {
+        >main {
+            width: 700px;
+            margin: 0 auto;
             >div {
-                flex-direction: row;
-                >section {
-                    &:nth-of-type(1) {
-                        width: 40%;
+                >div {
+                    flex-direction: row;
+                    >section:nth-of-type(1) {
+                        flex-basis: calc(60% - 2rem);
+                        margin-right: 2rem;
                     }
-                    &:nth-of-type(2) {
-                        width: 30%;
-                    }
-                    &:nth-of-type(3) {
-                        width: 30%;
+                    >section:nth-of-type(2) {
+                        flex-basis: 40%;
                     }
                 }
             }
-            h1 {
-                font-size: 2.2rem;
-            }
-            h2 {
-                font-size: 2rem;
-                margin: 4rem 0 2.5rem 0;
-            }
-            p {
-                font-size: 1.4rem;
-            }
-            app-main-grid {
-                width: 100%;
-            }
-            app-card-list {
-                width: 100%;
+            section {
+                >header {
+                    margin: 3rem 0;
+                }
+                app-featured-reviews {
+                    margin: 0;
+                }
             }
         }
     }
 }
 
-@media screen and (min-width: 1200px) {
-    main {
-        max-width: 1200px;
+@media screen and (min-width: 991px) {
+     :host {
+        >main {
+            width: 900px;
+        }
     }
 }
 
-@media screen and (min-width: 1400px) {
-    main {
-        max-width: 1400px;
-        margin: 0 auto;
+@media screen and (min-width: 1200px) {
+     :host {
+        >main {
+            width: 1180px;
+        }
     }
 }

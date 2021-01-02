@@ -21,7 +21,7 @@ export class SeoService {
     this.meta.updateTag({ name: 'twitter:description', content: config.description});
     this.meta.updateTag({ name: 'twitter:image', content: config.image});
     this.meta.updateTag({ name: 'og:type', content: 'article'});
-    this.meta.updateTag({ name: 'og:site_name', content: 'camisetasbasicas.online/' + config.slug});
+    this.meta.updateTag({ name: 'og:url', content: 'camisetasbasicas.online/' + (config.parent ? config.parent.slug + '/' : '') + config.slug });
     this.meta.updateTag({ name: 'og:title', content: config.title});
     this.meta.updateTag({ name: 'og:description', content: config.description});
     this.meta.updateTag({ name: 'og:image', content: config.image});
@@ -30,6 +30,7 @@ export class SeoService {
   }
 
   private _setCanonical(config) {
+    this.document.querySelectorAll('link[rel=canonical]').forEach(l => l.remove());
     const link: HTMLLinkElement = this.document.createElement('link');
     link.setAttribute('rel', 'canonical');
     link.setAttribute('href', 'https://camisetasbasicas.online/' + (config.parent ? config.parent.slug + '/' : '') + config.slug);
@@ -37,6 +38,7 @@ export class SeoService {
   }
 
   private _setHrefLang(config) {
+    this.document.querySelectorAll('link[rel=alternate]').forEach(l => l.remove());
     const link: HTMLLinkElement = this.document.createElement('link');
     link.setAttribute('rel', 'alternate');
     link.setAttribute('hreflang', 'es');
