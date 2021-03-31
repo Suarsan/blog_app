@@ -1,9 +1,9 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, Inject, PLATFORM_ID } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { Subscription } from 'rxjs/internal/Subscription';
+import { Subscription } from 'rxjs';
+import { isPlatformBrowser } from '@angular/common';
 
-// tslint:disable-next-line:ban-types
-declare let gtag: Function;
+declare var gtag;
 
 @Component({
   selector: 'app-root',
@@ -12,14 +12,16 @@ declare let gtag: Function;
 })
 export class AppComponent implements OnDestroy {
 
+  brands;
   routerSubscription: Subscription;
 
-  constructor(private router: Router) {
-    this.routerSubscription = this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-          gtag('config', 'G-MBJW38R751', { page_path: event.urlAfterRedirects });
-      }
-    });
+  constructor(@Inject(PLATFORM_ID) private platformId: object,
+              private router: Router) {
+                this.routerSubscription = this.router.events.subscribe(event => {
+                  if (event instanceof NavigationEnd && isPlatformBrowser(this.platformId)) {
+                      gtag('config', 'G-MBJW38R751', { page_path: event.urlAfterRedirects });
+                  }
+                });
   }
 
   ngOnDestroy() {

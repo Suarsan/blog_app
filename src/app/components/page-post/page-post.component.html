@@ -1,33 +1,33 @@
-<div>
-    <article>
-        <div [style.backgroundImage]="getImageMain()">
-            <div>
-                <span>{{post?.type.content}}</span>
-            </div>
-            <h1>{{post?.title}}</h1>
-            <ul>
-                <li *ngFor="let tag of post?.tags">
-                    <a [routerLink]="['/tag', tag.content]">{{tag.content}}</a>
-                </li>
-            </ul>
-        </div>
+<article>
+    <div [style.backgroundImage]="getImageMain()">
         <div>
-            <div>
-                <ng-container *ngFor="let paragraph of post?.paragraphs">
-                    <h5 *ngIf="paragraph?.htmlTag.content == 'title'" [innerHtml]="paragraph.content"></h5>
-                    <h6 *ngIf="paragraph?.htmlTag.content == 'subtitle'" [innerHtml]="paragraph.content"></h6>
-                    <p *ngIf="paragraph?.htmlTag.content == 'paragraph'" [innerHtml]="paragraph.content"></p>
-                    <strong *ngIf="paragraph?.htmlTag.content == 'quote'" [innerHtml]="paragraph.content"></strong>
-                    <span *ngIf="paragraph?.htmlTag.content == 'summary'" [innerHtml]="paragraph.content"></span>
-                    <img *ngIf="paragraph?.htmlTag.content == 'image'" [src]="environment.staticURL + paragraph.content" [alt]="environment.staticURL + paragraph.content" loading="lazy">
-                    <div *ngIf="paragraph?.htmlTag.content == 'images'">
-                        <img *ngFor="let image of paragraph.content.split(';')" [src]="environment.staticURL + image" [alt]="environment.staticURL + image" loading="lazy">
-                    </div>
-                </ng-container>
-            </div>
-            <aside>
-                <app-score-card [analysis]="post?.analysis"></app-score-card>
-            </aside>
+            <span>{{post?.type.content}}</span>
         </div>
-    </article>
-</div>
+        <h1>{{post?.title}}</h1>
+        <ul>
+            <li *ngFor="let tag of post?.tags">
+                <a [routerLink]="['/tag', tag.content]">{{tag.content}}</a>
+            </li>
+        </ul>
+    </div>
+    <div>
+        <div>
+            <ng-container *ngFor="let paragraph of post?.paragraphs">
+                <h5 *ngIf="paragraph?.htmlTag.content == 'title'" [innerHtml]="paragraph.content"></h5>
+                <h6 *ngIf="paragraph?.htmlTag.content == 'subtitle'" [innerHtml]="paragraph.content"></h6>
+                <p *ngIf="paragraph?.htmlTag.content == 'paragraph'" [innerHtml]="paragraph.content"></p>
+                <strong *ngIf="paragraph?.htmlTag.content == 'quote'" [innerHtml]="paragraph.content"></strong>
+                <span *ngIf="paragraph?.htmlTag.content == 'summary'" [innerHtml]="paragraph.content"></span>
+                <img *ngIf="paragraph?.htmlTag.content == 'image'" [src]="paragraph.content" [alt]="paragraph.content" loading="lazy">
+                <div *ngIf="paragraph?.htmlTag.content == 'images'">
+                    <img *ngFor="let image of paragraph.content.split(';')" [src]="image" [alt]="image" loading="lazy">
+                </div>
+                <iframe *ngIf="paragraph?.htmlTag.content == 'video'" [src]="domSanitizer.bypassSecurityTrustResourceUrl(paragraph.content.split(';')[0])" [width]="paragraph.content.split(';')[1]" [height]="paragraph.content.split(';')[2]" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+            </ng-container>
+        </div>
+        <aside>
+            <app-score-card [analysis]="post?.analysis"></app-score-card>
+        </aside>
+    </div>
+</article>

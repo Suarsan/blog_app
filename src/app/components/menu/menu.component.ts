@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { PostService } from '../../services/post-services/post-service/post.service';
-import { tap, take } from 'rxjs/operators';
-import { TransferState, makeStateKey } from '@angular/platform-browser';
+import { Component, OnInit, PLATFORM_ID, Inject } from '@angular/core';
+import { PostService } from 'src/app/services/post-services/post-service/post.service';
+import { tap } from 'rxjs/operators';
+import { makeStateKey, TransferState } from '@angular/platform-browser';
+import { isPlatformServer } from '@angular/common';
 
 const BRANDS = makeStateKey('brands');
 
@@ -12,14 +13,25 @@ const BRANDS = makeStateKey('brands');
 })
 export class MenuComponent implements OnInit {
 
-  showMenu = false;
   brands;
+  showMenu;
 
-  constructor(private postService: PostService,
+  constructor(@Inject(PLATFORM_ID) private platformId: object,
+              private postService: PostService,
               private state: TransferState) { }
 
   ngOnInit() {
     this._getBrands();
+  }
+
+  private _getBrands() {
+    this.brands = this.state.get(BRANDS, null);
+    if (!this.brands) {
+      this.postService.getBrands().pipe(
+        tap(brands => isPlatformServer(this.platformId) ? this.state.set(BRANDS, brands) : null),
+        tap(brands => this.brands = brands)
+      ).subscribe();
+    }
   }
 
   public closeMenu() {
@@ -28,14 +40,5 @@ export class MenuComponent implements OnInit {
   public openMenu() {
     this.showMenu = true;
   }
-  public _getBrands() {
-    this.brands = this.state.get(BRANDS, null);
-    if (!this.brands) {
-      this.postService.getBrands().pipe(
-        take(1),
-        tap(o => this.brands = o),
-        tap(o => this.state.set(BRANDS, this.brands))
-        ).subscribe();
-    }
-  }
+
 }

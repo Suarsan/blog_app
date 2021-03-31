@@ -2,9 +2,8 @@ import { Component, Input, OnChanges, PLATFORM_ID, Inject } from '@angular/core'
 import { PostService } from 'src/app/services/post-services/post-service/post.service';
 import { tap, take } from 'rxjs/operators';
 import { SeoService } from 'src/app/services/seo/seo.service';
-import { environment } from 'src/environments/environment';
 import { TransferState, makeStateKey } from '@angular/platform-browser';
-import { Subscription } from 'rxjs/internal/Subscription';
+import { Subscription } from 'rxjs';
 import { isPlatformServer } from '@angular/common';
 
 const POSTS = makeStateKey('posts');
@@ -18,15 +17,12 @@ export class PageSomatotypeComponent implements OnChanges {
 
   @Input() post;
   posts;
-  environment;
   routerSubscription: Subscription;
 
   constructor(private postService: PostService,
               @Inject(PLATFORM_ID) private platformId: any,
               private seoService: SeoService,
-              private state: TransferState) {
-                this.environment = environment;
-              }
+              private state: TransferState) { }
 
   ngOnChanges() {
     this._getPostsByTags();

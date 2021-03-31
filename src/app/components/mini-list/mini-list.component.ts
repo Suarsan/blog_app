@@ -1,5 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { PostService } from '../../services/post-services/post-service/post.service';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-mini-list',

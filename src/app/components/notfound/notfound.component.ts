@@ -1,8 +1,7 @@
-import { Component, OnInit, Inject, Optional, PLATFORM_ID } from '@angular/core';
-import { REQUEST } from '@nguniversal/express-engine/tokens';
-import { RESPONSE } from '@nguniversal/express-engine/tokens';
 import { isPlatformServer } from '@angular/common';
-import { Request, Response } from 'express';
+import { Component, Inject, OnInit, Optional, PLATFORM_ID } from '@angular/core';
+import { RESPONSE } from '@nguniversal/express-engine/tokens';
+import { Response } from 'express';
 
 @Component({
   selector: 'app-notfound',
@@ -11,8 +10,7 @@ import { Request, Response } from 'express';
 })
 export class NotfoundComponent implements OnInit {
 
-  constructor(@Optional() @Inject(REQUEST) private request: Request,
-              @Optional() @Inject(RESPONSE) private response: Response,
+  constructor(@Optional() @Inject(RESPONSE) private response: Response,
               @Inject(PLATFORM_ID) private platformId: any) { }
 
   ngOnInit(): void {

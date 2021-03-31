@@ -1,12 +1,11 @@
-import { Component, OnInit, OnDestroy, Inject, PLATFORM_ID } from '@angular/core';
-import { tap, take } from 'rxjs/operators';
-import { PostService } from 'src/app/services/post-services/post-service/post.service';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { filter } from 'rxjs/operators';
-import { SeoService } from 'src/app/services/seo/seo.service';
-import { Subscription } from 'rxjs/internal/Subscription';
-import { TransferState, makeStateKey } from '@angular/platform-browser';
 import { isPlatformServer } from '@angular/common';
+import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
+import { makeStateKey, TransferState } from '@angular/platform-browser';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { filter, take, tap } from 'rxjs/operators';
+import { PostService } from 'src/app/services/post-services/post-service/post.service';
+import { SeoService } from 'src/app/services/seo/seo.service';
 
 const POSTS = makeStateKey('posts');
 

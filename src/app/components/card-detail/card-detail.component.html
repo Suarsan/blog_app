@@ -1,16 +1,16 @@
 <article *ngIf="post">
     <figure>
-        <a [routerLink]="[post.parent ? '/' + post.parent : null + '/' + post.slug]">
+        <a [routerLink]="[(post.parent ? '/' + post.parent.slug : '') + '/' + post.slug]">
             <img [src]="post?.image" [alt]="post?.title" loading="lazy">
         </a>
         <div *ngIf="post?.tags?.length > 0">
-            <a [routerLink]="[post.parent ? '/' + post.parent : null + '/' + post.slug]">
+            <a [routerLink]="[(post.parent ? '/' + post.parent.slug : '') + '/' + post.slug]">
                 <span>{{post?.tags[0].content}}</span>
             </a>
         </div>
     </figure>
     <div>
-        <a [routerLink]="[post.parent ? '/' + post.parent : null + '/' + post.slug]">
+        <a [routerLink]="[(post.parent ? '/' + post.parent.slug : '') + '/' + post.slug]">
             <h3>{{post?.title}}</h3>
         </a>
         <div>

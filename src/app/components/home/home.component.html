@@ -11,18 +11,10 @@
         </section>
         <section>
             <header>
-                <h2>Top 10 mejor valoradas</h2>
+                <h2>¿Cuál es tu camiseta ideal?</h2>
             </header>
             <div>
-                <app-card-list *ngIf="lastReviews" [posts]="bestReviews"></app-card-list>
-            </div>
-        </section>
-        <section>
-            <header>
-                <h2>Últimos análisis</h2>
-            </header>
-            <div>
-                <app-card-list *ngIf="lastReviews" [posts]="lastReviews"></app-card-list>
+                <app-card-list *ngIf="lastReviews" [posts]="somatotypePosts"></app-card-list>
             </div>
         </section>
         <section>
@@ -30,6 +22,14 @@
                 <h2>Mejores marcas</h2>
             </header>
             <app-directory *ngIf="lastReviews" [items]="brands"></app-directory>
+        </section>
+        <section>
+            <header>
+                <h2>Top 10 mejor valoradas</h2>
+            </header>
+            <div>
+                <app-card-list *ngIf="lastReviews" [posts]="bestReviews"></app-card-list>
+            </div>
         </section>
         <div>
             <section>

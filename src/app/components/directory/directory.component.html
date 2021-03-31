@@ -1,6 +1,6 @@
 <article *ngFor="let item of items">
     <a [routerLink]="item.slug" rel="bookmark">
-        <img [src]="environment.staticURL + item.image" [alt]="item.image" loading="lazy">
+        <img [src]="item.image" [alt]="item.image" loading="lazy">
         <div>
             <h3>{{item.title}}</h3>
         </div>

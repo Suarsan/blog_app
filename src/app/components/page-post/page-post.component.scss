@@ -1,5 +1,5 @@
 @import '../../../colors';
-div {
+:host {
     display: flex;
     flex-direction: column;
     >article {
@@ -117,6 +117,10 @@ div {
                     width: min-content;
                     align-self: center;
                 }
+                iframe {
+                    margin: 2rem auto;
+                    max-width: 100%;
+                }
             }
             >aside {
                 display: flex;
@@ -132,7 +136,7 @@ div {
 }
 
 @media screen and (min-width: 768px) {
-    div {
+     :host {
         >article {
             >div:nth-of-type(1) {
                 padding: 5rem 10rem 5rem 15rem;
@@ -183,7 +187,7 @@ div {
 }
 
 @media screen and (min-width: 991px) {
-    div {
+     :host {
         >article {
             >div:nth-of-type(2) {}
             >div:nth-of-type(3) {
@@ -194,7 +198,7 @@ div {
 }
 
 @media screen and (min-width: 1200px) {
-    div {
+     :host {
         >article {
             >div:nth-of-type(2) {}
             >div:nth-of-type(3) {

@@ -1,24 +1,19 @@
+<h1>{{ post?.title}}</h1>
 <div>
-    <h1>{{ post?.title}}</h1>
-    <ng-container *ngFor="let paragraph of post?.paragraphs.slice(0, 2)">
-        <h5 *ngIf="paragraph?.htmlTag.content == 'title'" [innerHtml]="paragraph.content"></h5>
-        <h6 *ngIf="paragraph?.htmlTag.content == 'subtitle'" [innerHtml]="paragraph.content"></h6>
-        <p *ngIf="paragraph?.htmlTag.content == 'paragraph'" [innerHtml]="paragraph.content"></p>
-        <strong *ngIf="paragraph?.htmlTag.content == 'quote'" [innerHtml]="paragraph.content"></strong>
-        <span *ngIf="paragraph?.htmlTag.content == 'summary'" [innerHtml]="paragraph.content"></span>
-        <img *ngIf="paragraph?.htmlTag.content == 'image'" [src]="paragraph.content" [alt]="paragraph.content" loading="lazy">
-    </ng-container>
+    <div>
+        <div>
+            <img [src]="post?.image" [alt]="post?.image" loading="lazy">
+            <ng-container *ngFor="let paragraph of post?.paragraphs">
+                <h5 *ngIf="paragraph?.htmlTag.content == 'title'" [innerHtml]="paragraph.content"></h5>
+                <h6 *ngIf="paragraph?.htmlTag.content == 'subtitle'" [innerHtml]="paragraph.content"></h6>
+                <p *ngIf="paragraph?.htmlTag.content == 'paragraph'" [innerHtml]="paragraph.content"></p>
+                <strong *ngIf="paragraph?.htmlTag.content == 'quote'" [innerHtml]="paragraph.content"></strong>
+                <span *ngIf="paragraph?.htmlTag.content == 'summary'" [innerHtml]="paragraph.content"></span>
+                <img *ngIf="paragraph?.htmlTag.content == 'image'" [src]="paragraph.content" [alt]="paragraph.content" loading="lazy">
+            </ng-container>
+        </div>
+    </div>
+    <aside>
+    </aside>
 </div>
-<div>
-    <app-card-grid [posts]="posts"></app-card-grid>
-</div>
-<div>
-    <ng-container *ngFor="let paragraph of post?.paragraphs.slice(2)">
-        <h5 *ngIf="paragraph?.htmlTag.content == 'title'" [innerHtml]="paragraph.content"></h5>
-        <h6 *ngIf="paragraph?.htmlTag.content == 'subtitle'" [innerHtml]="paragraph.content"></h6>
-        <p *ngIf="paragraph?.htmlTag.content == 'paragraph'" [innerHtml]="paragraph.content"></p>
-        <strong *ngIf="paragraph?.htmlTag.content == 'quote'" [innerHtml]="paragraph.content"></strong>
-        <span *ngIf="paragraph?.htmlTag.content == 'summary'" [innerHtml]="paragraph.content"></span>
-        <img *ngIf="paragraph?.htmlTag.content == 'image'" [src]="paragraph.content" [alt]="paragraph.content" loading="lazy">
-    </ng-container>
-</div>
+<app-card-grid [posts]="posts"></app-card-grid>

@@ -1,7 +1,6 @@
-import { Component, OnChanges, Input } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SeoService } from '../../services/seo/seo.service';
-import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -13,11 +12,9 @@ export class PagePostComponent implements OnChanges {
 
   @Input() post;
   tags;
-  environment;
 
   constructor(private seoService: SeoService,
-              private domSanitizer: DomSanitizer) {
-                this.environment = environment;
+              public domSanitizer: DomSanitizer) {
               }
 
   ngOnChanges() {
@@ -63,12 +60,13 @@ export class PagePostComponent implements OnChanges {
         reviewBody: post.paragraphs.map(p => p.content).join(''),
         publisher: {
           '@type': 'Organization',
-          name: 'Camisetasbasicas.online'
+          name: 'Camisetas basicas online'
         }
       },
       brand: {
         '@type': 'Brand',
-        logo: this.environment.staticURL + post.parent.image
+        logo: post.parent.image,
+        name: post.title
       }
     };
     this.seoService.setJSONLDMarkups(json);

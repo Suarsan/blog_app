@@ -2,8 +2,7 @@ import { Component, Input, OnChanges, Inject, PLATFORM_ID } from '@angular/core'
 import { PostService } from 'src/app/services/post-services/post-service/post.service';
 import { tap, take } from 'rxjs/operators';
 import { SeoService } from 'src/app/services/seo/seo.service';
-import { environment } from 'src/environments/environment';
-import { TransferState, makeStateKey } from '@angular/platform-browser';
+import { TransferState, makeStateKey, DomSanitizer } from '@angular/platform-browser';
 import { isPlatformServer } from '@angular/common';
 
 const POSTS = makeStateKey('posts');
@@ -16,19 +15,19 @@ const POSTS = makeStateKey('posts');
 export class PageBrandComponent implements OnChanges {
 
   @Input() post;
-  environment;
   posts;
 
   constructor(private postService: PostService,
               @Inject(PLATFORM_ID) private platformId: any,
               private seoService: SeoService,
-              private state: TransferState) {
-                this.environment = environment;
+              private state: TransferState,
+              public domSanitizer: DomSanitizer) {
               }
 
   ngOnChanges() {
     this._getPostsByParent();
     this._setMetaInfo(this.post);
+    this._setJSONLDMarkup(this.post);
   }
 
   private _getPostsByParent() {
@@ -51,5 +50,32 @@ export class PageBrandComponent implements OnChanges {
       parent: post.parent,
       image: post.image
     });
+  }
+
+  private _setJSONLDMarkup(post) {
+    const json = {
+      '@context': 'https://schema.org/',
+      '@type': 'Organization',
+      name: post.title,
+      brand: {
+        '@type': 'Brand',
+        logo: post.image,
+        name: post.title,
+      },
+      review: {
+        '@type': 'Review',
+        name: post.title,
+        author: {
+          '@type': 'Person',
+          name: post.author.firstname + ' ' + post.author.lastname
+        },
+        reviewBody: post.paragraphs.map(p => p.content).join(''),
+        publisher: {
+          '@type': 'Organization',
+          name: 'Camisetas basicas online'
+        }
+      }
+    };
+    this.seoService.setJSONLDMarkups(json);
   }
 }

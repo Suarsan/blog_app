@@ -1,5 +1,7 @@
 <app-page-post *ngIf="post?.type.content === 'REVIEW'" [post]="post"></app-page-post>
 <app-page-brand *ngIf="post?.type.content === 'BRAND'" [post]="post"></app-page-brand>
 <app-page-somatotype *ngIf="post?.type.content === 'SOMATOTYPE'" [post]="post"></app-page-somatotype>
+<app-page-somatotype *ngIf="post?.type.content === 'GENDER'" [post]="post"></app-page-somatotype>
+<app-page-somatotype *ngIf="post?.type.content === 'TYPE'" [post]="post"></app-page-somatotype>
 <app-page-glosary *ngIf="post?.type.content === 'GLOSARY'" [post]="post"></app-page-glosary>
 <app-page-sponsored *ngIf="post?.type.content === 'SPONSORED'" [post]="post"></app-page-sponsored>

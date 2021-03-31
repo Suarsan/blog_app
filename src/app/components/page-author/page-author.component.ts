@@ -16,7 +16,8 @@ const POSTS = makeStateKey('posts');
 export class PageAuthorComponent implements OnInit {
 
   posts;
-  author;
+  firstname;
+  lastname;
 
   constructor(@Inject(PLATFORM_ID) private platformId: any,
               private postService: PostService,
@@ -26,11 +27,10 @@ export class PageAuthorComponent implements OnInit {
 
   ngOnInit(): void {
     const params = this.activatedRoute.snapshot.params['author'];
-    const firstname = params.split('-')[0];
-    const lastname = params.split('-')[1];
-    this.author = firstname + ' ' + lastname;
-    this._getPostsByAuthor(firstname, lastname);
-    this._setMetaInfo(this.author);
+    this.firstname = params.split('-')[0];
+    this.lastname = params.split('-')[1];
+    this._getPostsByAuthor(this.firstname, this.lastname);
+    this._setMetaInfo(this.firstname, this.lastname);
   }
 
   private _getPostsByAuthor(firstname, lastname) {
@@ -44,11 +44,11 @@ export class PageAuthorComponent implements OnInit {
     }
   }
 
-  private _setMetaInfo(author) {
+  private _setMetaInfo(firstname, lastname) {
     this.seoService.setMetaTags({
-      title: 'Articulos escritos por ' + author + ' sobre camisetas básicas',
-      description: 'Todos los articulos escritos por ' + author + ' sobre camisetas básicas · Camisetas básicas online',
-      slug: 'author/' + author
+      title: 'Articulos escritos por ' + firstname + ' ' + lastname + ' sobre camisetas básicas',
+      description: 'Todos los articulos escritos por ' + firstname + ' ' + lastname + ' sobre camisetas básicas · Camisetas básicas online',
+      slug: 'author/' + firstname + '-' + lastname
     });
   }
 }

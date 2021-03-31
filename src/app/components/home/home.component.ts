@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { PostService } from 'src/app/services/post-services/post-service/post.service';
 import { TagsService } from 'src/app/services/tags-services/tags-service/tags.service';
 import { tap, take } from 'rxjs/operators';
 import { TransferState, makeStateKey } from '@angular/platform-browser';
 
+const BRANDS = makeStateKey('brands');
 const BEST_REVIEWS = makeStateKey('bestReviews');
 const LAST_REVIEWS = makeStateKey('lastReviews');
-const BRANDS = makeStateKey('brands');
+const SOMATOTYPE_POSTS = makeStateKey('somatotypePosts');
 const TAGS = makeStateKey('tags');
 
 
@@ -19,6 +20,7 @@ export class HomeComponent implements OnInit {
 
   bestReviews;
   lastReviews;
+  somatotypePosts;
   brands;
   tags;
 
@@ -28,8 +30,9 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this._getLastReviews();
-    this._getBrands();
     this._getTags();
+    this._getSomatotypePosts();
+    this._getBrands();
   }
 
   private _getLastReviews() {
@@ -45,16 +48,17 @@ export class HomeComponent implements OnInit {
       ).subscribe();
     }
   }
-  private _getBrands() {
-    this.brands = this.state.get(BRANDS, null);
-    if (!this.brands) {
-      this.postService.getBrands().pipe(
+  private _getSomatotypePosts() {
+    this.somatotypePosts = this.state.get(SOMATOTYPE_POSTS, null);
+    if (!this.somatotypePosts) {
+      this.postService.getSomatotypePosts().pipe(
         take(1),
-        tap(o => this.brands = o),
-        tap(o => this.state.set(BRANDS, this.brands))
+        tap(o => this.somatotypePosts = o),
+        tap(o => this.state.set(SOMATOTYPE_POSTS, o)),
       ).subscribe();
     }
   }
+
   private _getTags() {
     this.tags = this.state.get(TAGS, null);
     if (!this.tags) {
@@ -62,6 +66,16 @@ export class HomeComponent implements OnInit {
         take(1),
         tap(o => this.tags = o),
         tap(o => this.state.set(TAGS, o))
+      ).subscribe();
+    }
+  }
+
+  private _getBrands() {
+    this.brands = this.state.get(BRANDS, null);
+    if (!this.brands) {
+      this.postService.getBrands().pipe(
+        tap(brands => this.state.set(BRANDS, brands)),
+        tap(brands => this.brands = brands)
       ).subscribe();
     }
   }

@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { PageComponent } from './components/page/page.component';
+import { RouterModule, Routes } from '@angular/router';
+import { NotfoundComponent } from './components/notfound/notfound.component';
 import { PageAuthorComponent } from './components/page-author/page-author.component';
 import { PageTagComponent } from './components/page-tag/page-tag.component';
-import { NotfoundComponent } from './components/notfound/notfound.component';
+import { PageComponent } from './components/page/page.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', loadChildren: () => import('./components/home/home.module').then(m => m.HomeModule) },
