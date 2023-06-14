@@ -27,7 +27,7 @@
         "@nguniversal/express-engine": "^11.0.1",
         "apollo-angular": "^2.1.0",
         "dotenv": "^16.1.4",
-        "express": "^4.15.2",
+        "express": "^4.18.2",
         "graphql": "^15.0.0",
         "node-sass": "^4.9.0",
         "rxjs": "~6.6.3",
