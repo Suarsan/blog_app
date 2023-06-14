@@ -48,7 +48,7 @@ export class PageComponent implements OnInit, OnDestroy {
   }
 
   private getPostPath() {
-    return this.activatedRoute.url.pipe(take(1), map(path => path[path.length - 1].path));
+    return this.activatedRoute.url.pipe(take(1), map(path => path[path?.length - 1].path));
   }
 
   ngOnDestroy() {
